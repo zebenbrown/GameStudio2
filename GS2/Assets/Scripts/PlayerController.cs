@@ -5,11 +5,13 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     //private PlayerControls controls;
-    private float speed = 3.0f;
+    [SerializeField]
+    private float speed = 5.0f;
     
     
     private PlayerInput input;
     private InputAction moveAction;
+    private InputAction jumpAction;
     
 
     private void Awake()
@@ -17,29 +19,11 @@ public class PlayerController : MonoBehaviour
         //controls = new PlayerControls();
         input = GetComponent<PlayerInput>();
         moveAction = input.actions.FindAction("Move");
+        jumpAction = input.actions.FindAction("Jump");
     }
-
-    private void Start()
-    {
-        
-    }
-
-    /*private void OnEnable()
-    {
-        controls.Enable();
-        controls.Regular.Move.performed += move;
-    }
-
-    private void OnDisable()
-    {
-        controls.Disable();
-        controls.Regular.Move.performed -= move;
-    }*/
 
     private void Update()
     {
-        //Vector2 move = controls.Regular.Move.ReadValue<Vector2>();
-        //float jump = controls.Regular.Jump.ReadValue<float>();
         movePlayer();
     }
 
@@ -47,6 +31,10 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 movement = moveAction.ReadValue<Vector2>();
         transform.position += new Vector3(movement.x, 0, movement.y) * speed * Time.deltaTime;
-        
+    }
+
+    private void jump()
+    {
+        //dont know if we need this
     }
 }
