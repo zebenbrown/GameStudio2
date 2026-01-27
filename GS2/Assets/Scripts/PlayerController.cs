@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     //private PlayerControls controls;
     [SerializeField]
     private float speed = 5.0f;
+
+    //to have the camera follow the player
+    [SerializeField] private Camera camera;
     
     
     private PlayerInput input;
@@ -67,6 +70,8 @@ public class PlayerController : MonoBehaviour
     {
         audioSource.Stop();
     }
+
+    camera.transform.position += new Vector3(movement.x, 0, movement.y) * speed * Time.deltaTime;
 
     private void jump()
     {
