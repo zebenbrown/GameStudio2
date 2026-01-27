@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     //private PlayerControls controls;
     [SerializeField]
     private float speed = 5.0f;
+
+    //to have the camera follow the player
+    [SerializeField] private Camera camera;
     
     
     private PlayerInput input;
@@ -31,6 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 movement = moveAction.ReadValue<Vector2>();
         transform.position += new Vector3(movement.x, 0, movement.y) * speed * Time.deltaTime;
+        camera.transform.position += new Vector3(movement.x, 0, movement.y) * speed * Time.deltaTime;
     }
 
     private void jump()
