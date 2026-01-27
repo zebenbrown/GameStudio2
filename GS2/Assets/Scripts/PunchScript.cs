@@ -6,12 +6,18 @@ public class PunchScript : Arm_Base
     [SerializeField] private AnimationClip punchAnimationClip;
     private string punchAnimationClipName;
     private Animator animator;
+    private float animationTimer = 0;
+
+    private AudioSource audioSource;
+
 
     protected override void ArmSpecificStart()
     {
         animator = GetComponent<Animator>();
         punchAnimationClipName = punchAnimationClip.name;
         animator.enabled = false;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     protected override void SpecificEquip()
@@ -24,9 +30,27 @@ public class PunchScript : Arm_Base
         animator.enabled = false;
     }
 
+    private void Update()
+    {
+        if (animationTimer > 0)
+        {
+            animationTimer -= Time.deltaTime;
+        }
+        else
+        {
+            animationTimer = 0;
+        }
+    }
+
     private void PunchForward()
     {
         animator.Play(punchAnimationClipName);
+
+        if (animationTimer == 0)
+        {
+            audioSource.Play();
+            animationTimer = punchAnimationClip.length;
+        }
     }
 
     public override void ArmMainAction()

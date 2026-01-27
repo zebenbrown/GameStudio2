@@ -1,3 +1,7 @@
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,6 +9,9 @@ public class Fire : Arm_Base
 {
     [SerializeField] private GameObject BulletPrefab;
     [SerializeField] private Transform BulletReleasePoint;
+
+    [SerializeField] private List<AudioClip> shootSounds;
+    private AudioSource audioSource;
 
     const float forwardForceFloat = 1000;
     Vector3 forwardForceVector;
@@ -15,6 +22,8 @@ public class Fire : Arm_Base
 
         forwardForceVector = Vector3.forward;
         forwardForceVector.z += forwardForceFloat;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     public override void ArmMainAction()
@@ -38,5 +47,15 @@ public class Fire : Arm_Base
 
         bullet.GetComponent<Rigidbody>().AddForce(forwardForceVector);
         bullet.transform.SetParent(null);
+
+        audioSource.generator = GetRandomShootSound();
+        audioSource.Play();
+    }
+
+    private AudioClip GetRandomShootSound()
+    {
+        AudioClip sound = shootSounds.ElementAt((int)Random.Range(0.0f, shootSounds.Count));
+
+        return sound;
     }
 }
