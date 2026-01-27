@@ -11,7 +11,7 @@ public class ArmSocketScript : MonoBehaviour
     [SerializeField] private ArmSocketScript otherArmSocket;
     private Arm_Base AttachedArm;
     public List<Arm_Base> ArmsInRange;
-    [SerializeField] private GameObject ArmDetector;
+    private GameObject ArmDetector;
 
     [SerializeField] private InputActionReference swapArmAction;
     [SerializeField] InputActionReference armAction;
@@ -23,7 +23,7 @@ public class ArmSocketScript : MonoBehaviour
         gameManager = FindAnyObjectByType<GameManager>();
         gameManager.RegisterSocket(this);
 
-        ArmDetector.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
     private void OnEnable()

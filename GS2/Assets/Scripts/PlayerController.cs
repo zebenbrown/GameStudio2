@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private float speed = 5.0f;
 
     //to have the camera follow the player
-    [SerializeField] private Camera camera;
+    [SerializeField] private new Camera camera;
     
     
     private PlayerInput input;
@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+
         //controls = new PlayerControls();
         input = GetComponent<PlayerInput>();
         moveAction = input.actions.FindAction("Move");
@@ -59,6 +60,8 @@ public class PlayerController : MonoBehaviour
                 isPlaying = false;
             }
         }
+
+        camera.transform.position += new Vector3(movement.x, 0, movement.y) * speed * Time.deltaTime;
     }
 
     private void PlayWalkingSound()
@@ -70,8 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         audioSource.Stop();
     }
-
-    camera.transform.position += new Vector3(movement.x, 0, movement.y) * speed * Time.deltaTime;
+    
 
     private void jump()
     {
