@@ -9,12 +9,16 @@ public class Fire : Arm_Base
     const float forwardForceFloat = 1000;
     Vector3 forwardForceVector;
 
+    private AudioSource audioSource;
+
     protected override void ArmSpecificStart()
     {
         startRotation = Quaternion.Euler(90.0f, 0.0f, 0.0f);
 
         forwardForceVector = Vector3.forward;
         forwardForceVector.z += forwardForceFloat;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     public override void ArmMainAction()
@@ -38,5 +42,7 @@ public class Fire : Arm_Base
 
         bullet.GetComponent<Rigidbody>().AddForce(forwardForceVector);
         bullet.transform.SetParent(null);
+
+        audioSource.Play();
     }
 }
