@@ -9,20 +9,29 @@ public class PlayerController : MonoBehaviour
     private float speed = 5.0f;
 
     //to have the camera follow the player
-    [SerializeField] private Camera camera;
+    [SerializeField] private new Camera camera;
     
     
     private PlayerInput input;
     private InputAction moveAction;
     private InputAction jumpAction;
+
+    private AudioSource audioSource;
+
+    private bool isPlaying;
     
 
     private void Awake()
     {
+
         //controls = new PlayerControls();
         input = GetComponent<PlayerInput>();
         moveAction = input.actions.FindAction("Move");
         jumpAction = input.actions.FindAction("Jump");
+
+        audioSource = GetComponent<AudioSource>();
+
+        isPlaying = false;
     }
 
     private void Update()
@@ -34,8 +43,37 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 movement = moveAction.ReadValue<Vector2>();
         transform.position += new Vector3(movement.x, 0, movement.y) * speed * Time.deltaTime;
+
+        if ((movement.x != 0) || (movement.y != 0))
+        {
+            if (!isPlaying)
+            {
+                PlayWalkingSound();
+                isPlaying = true;
+            }
+        }
+        else
+        {
+            if (isPlaying)
+            {
+                StopWalkingSound();
+                isPlaying = false;
+            }
+        }
+
         camera.transform.position += new Vector3(movement.x, 0, movement.y) * speed * Time.deltaTime;
     }
+
+    private void PlayWalkingSound()
+    {
+        audioSource.Play();
+    }
+
+    private void StopWalkingSound()
+    {
+        audioSource.Stop();
+    }
+    
 
     private void jump()
     {
