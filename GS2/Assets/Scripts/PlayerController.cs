@@ -21,6 +21,10 @@ public class PlayerController : MonoBehaviour
     private bool isPlaying;
     
 
+    private bool isMoving = false;
+    private AudioSource audioSource;
+
+
     private void Awake()
     {
 
@@ -62,6 +66,23 @@ public class PlayerController : MonoBehaviour
         }
 
         camera.transform.position += new Vector3(movement.x, 0, movement.y) * speed * Time.deltaTime;
+
+        if ((movement.x != 0) || (movement.y != 0))
+        {
+            if (!isMoving)
+            {
+                audioSource.Play();
+                isMoving = true;
+            }
+        }
+        else
+        {
+            if (isMoving)
+            {
+                audioSource.Stop();
+                isMoving = false;
+            }
+        }
     }
 
     private void PlayWalkingSound()

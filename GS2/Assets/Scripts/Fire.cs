@@ -16,6 +16,8 @@ public class Fire : Arm_Base
     const float forwardForceFloat = 1000;
     Vector3 forwardForceVector;
 
+    private AudioSource audioSource;
+
     protected override void ArmSpecificStart()
     {
         startRotation = Quaternion.Euler(90.0f, 0.0f, 0.0f);

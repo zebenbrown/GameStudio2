@@ -11,7 +11,9 @@ public abstract class Arm_Base : MonoBehaviour
     protected Quaternion startRotation;
     [SerializeField] protected GameObject rangeIndicator;
 
-    private bool isEquipped = false;
+    protected ArmSocketScript attachedArmSocket;
+
+    protected bool isEquipped = false;
 
     private void Start()
     {
@@ -41,6 +43,7 @@ public abstract class Arm_Base : MonoBehaviour
     public virtual void EquipArm(Transform armSocket)
     {
         transform.parent = armSocket;
+        attachedArmSocket = armSocket.GetComponent<ArmSocketScript>();
         ResetTransform();
         rb.constraints = RigidbodyConstraints.FreezeAll;
         collider.enabled = false;
@@ -48,6 +51,15 @@ public abstract class Arm_Base : MonoBehaviour
         isEquipped = true;
 
         DisableIndicator();
+
+        if (attachedArmSocket.gameObject.name == "Arm_Socket_R")
+        {
+            transform.rotation = new Quaternion(0.0f, 0.0f, 180.0f, 1.0f);
+        }
+        else
+        {
+            transform.rotation = Quaternion.identity;
+        }
 
         SpecificEquip();
     }
@@ -62,6 +74,7 @@ public abstract class Arm_Base : MonoBehaviour
     public virtual void DropArm()
     {
         transform.parent = null;
+        attachedArmSocket = null;
         rb.constraints = RigidbodyConstraints.None;
         collider.enabled = true;
 

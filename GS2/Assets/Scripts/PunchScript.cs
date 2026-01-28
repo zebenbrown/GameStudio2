@@ -9,7 +9,7 @@ public class PunchScript : Arm_Base
     private float animationTimer = 0;
 
     private AudioSource audioSource;
-
+    private float animationTimer = 0;
 
     protected override void ArmSpecificStart()
     {
@@ -46,7 +46,7 @@ public class PunchScript : Arm_Base
     {
         animator.Play(punchAnimationClipName);
 
-        if (animationTimer == 0)
+        if (!audioSource.isPlaying && animationTimer == 0)
         {
             audioSource.Play();
             animationTimer = punchAnimationClip.length;
