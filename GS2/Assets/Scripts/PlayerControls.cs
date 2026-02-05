@@ -109,6 +109,42 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightArmActivate"",
+                    ""type"": ""Button"",
+                    ""id"": ""0d239d6b-08ab-4bd3-a851-45b43b716c1c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftArmActivate"",
+                    ""type"": ""Button"",
+                    ""id"": ""9c3fdc48-9812-4d75-806f-da742d255dd1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwapRightArm"",
+                    ""type"": ""Button"",
+                    ""id"": ""17798c0c-0975-40a5-b688-b5b64f9eae66"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwapLeftArm"",
+                    ""type"": ""Button"",
+                    ""id"": ""b5731418-f825-4530-a713-2a36e19c813a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -177,6 +213,50 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""657d92a3-d3c8-42c6-b41f-a11a00d5997e"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightArmActivate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89143349-c2ae-4ac5-bdc1-2461a24c4f5a"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftArmActivate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c57f32a7-ca66-4197-a8e5-0b454bda3373"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwapRightArm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""def1220c-c960-49fa-b336-3e7f565a466a"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwapLeftArm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -187,6 +267,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Regular = asset.FindActionMap("Regular", throwIfNotFound: true);
         m_Regular_Move = m_Regular.FindAction("Move", throwIfNotFound: true);
         m_Regular_Jump = m_Regular.FindAction("Jump", throwIfNotFound: true);
+        m_Regular_RightArmActivate = m_Regular.FindAction("RightArmActivate", throwIfNotFound: true);
+        m_Regular_LeftArmActivate = m_Regular.FindAction("LeftArmActivate", throwIfNotFound: true);
+        m_Regular_SwapRightArm = m_Regular.FindAction("SwapRightArm", throwIfNotFound: true);
+        m_Regular_SwapLeftArm = m_Regular.FindAction("SwapLeftArm", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -269,6 +353,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IRegularActions> m_RegularActionsCallbackInterfaces = new List<IRegularActions>();
     private readonly InputAction m_Regular_Move;
     private readonly InputAction m_Regular_Jump;
+    private readonly InputAction m_Regular_RightArmActivate;
+    private readonly InputAction m_Regular_LeftArmActivate;
+    private readonly InputAction m_Regular_SwapRightArm;
+    private readonly InputAction m_Regular_SwapLeftArm;
     /// <summary>
     /// Provides access to input actions defined in input action map "Regular".
     /// </summary>
@@ -288,6 +376,22 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Regular/Jump".
         /// </summary>
         public InputAction @Jump => m_Wrapper.m_Regular_Jump;
+        /// <summary>
+        /// Provides access to the underlying input action "Regular/RightArmActivate".
+        /// </summary>
+        public InputAction @RightArmActivate => m_Wrapper.m_Regular_RightArmActivate;
+        /// <summary>
+        /// Provides access to the underlying input action "Regular/LeftArmActivate".
+        /// </summary>
+        public InputAction @LeftArmActivate => m_Wrapper.m_Regular_LeftArmActivate;
+        /// <summary>
+        /// Provides access to the underlying input action "Regular/SwapRightArm".
+        /// </summary>
+        public InputAction @SwapRightArm => m_Wrapper.m_Regular_SwapRightArm;
+        /// <summary>
+        /// Provides access to the underlying input action "Regular/SwapLeftArm".
+        /// </summary>
+        public InputAction @SwapLeftArm => m_Wrapper.m_Regular_SwapLeftArm;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -320,6 +424,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @RightArmActivate.started += instance.OnRightArmActivate;
+            @RightArmActivate.performed += instance.OnRightArmActivate;
+            @RightArmActivate.canceled += instance.OnRightArmActivate;
+            @LeftArmActivate.started += instance.OnLeftArmActivate;
+            @LeftArmActivate.performed += instance.OnLeftArmActivate;
+            @LeftArmActivate.canceled += instance.OnLeftArmActivate;
+            @SwapRightArm.started += instance.OnSwapRightArm;
+            @SwapRightArm.performed += instance.OnSwapRightArm;
+            @SwapRightArm.canceled += instance.OnSwapRightArm;
+            @SwapLeftArm.started += instance.OnSwapLeftArm;
+            @SwapLeftArm.performed += instance.OnSwapLeftArm;
+            @SwapLeftArm.canceled += instance.OnSwapLeftArm;
         }
 
         /// <summary>
@@ -337,6 +453,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @RightArmActivate.started -= instance.OnRightArmActivate;
+            @RightArmActivate.performed -= instance.OnRightArmActivate;
+            @RightArmActivate.canceled -= instance.OnRightArmActivate;
+            @LeftArmActivate.started -= instance.OnLeftArmActivate;
+            @LeftArmActivate.performed -= instance.OnLeftArmActivate;
+            @LeftArmActivate.canceled -= instance.OnLeftArmActivate;
+            @SwapRightArm.started -= instance.OnSwapRightArm;
+            @SwapRightArm.performed -= instance.OnSwapRightArm;
+            @SwapRightArm.canceled -= instance.OnSwapRightArm;
+            @SwapLeftArm.started -= instance.OnSwapLeftArm;
+            @SwapLeftArm.performed -= instance.OnSwapLeftArm;
+            @SwapLeftArm.canceled -= instance.OnSwapLeftArm;
         }
 
         /// <summary>
@@ -391,5 +519,33 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnJump(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "RightArmActivate" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRightArmActivate(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "LeftArmActivate" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLeftArmActivate(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SwapRightArm" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwapRightArm(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SwapLeftArm" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwapLeftArm(InputAction.CallbackContext context);
     }
 }
