@@ -16,7 +16,6 @@ public class Fire : Arm_Base
     const float forwardForceFloat = 1000;
     Vector3 forwardForceVector;
 
-    private AudioSource audioSource;
 
     protected override void ArmSpecificStart()
     {

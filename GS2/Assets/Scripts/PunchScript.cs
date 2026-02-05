@@ -9,7 +9,6 @@ public class PunchScript : Arm_Base
     private float animationTimer = 0;
 
     private AudioSource audioSource;
-    private float animationTimer = 0;
 
     protected override void ArmSpecificStart()
     {

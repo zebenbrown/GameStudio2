@@ -22,8 +22,6 @@ public class PlayerController : MonoBehaviour
     
 
     private bool isMoving = false;
-    private AudioSource audioSource;
-
 
     private void Awake()
     {
