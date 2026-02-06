@@ -761,6 +761,7 @@ GameObject:
   - component: {fileID: 527902699}
   - component: {fileID: 527902698}
   - component: {fileID: 527902697}
+  - component: {fileID: 527902701}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -862,6 +863,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &527902701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527902696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 31d56e83abc9d474d8c262f3fbea58d6, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &632847195
 GameObject:
   m_ObjectHideFlags: 0
@@ -1883,6 +1916,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 857175713644837453, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2291686125106107363, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2471309850958260778, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1890,6 +1931,22 @@ PrefabInstance:
     - target: {fileID: 2479017305602448542, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479017305602448542, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479017305602448542, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399915355253698635, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165749502770995392, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4227986080709768983, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
       propertyPath: speed
@@ -1899,6 +1956,14 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 632847199}
+    - target: {fileID: 4311293486499552098, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931198042597764443, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5142773179032784731, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
       propertyPath: armAction
       value: 
@@ -1947,6 +2012,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5635978783137286782, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6093527881901219167, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6392487709266995964, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
       propertyPath: armAction
       value: 
@@ -1955,6 +2028,14 @@ PrefabInstance:
       propertyPath: swapArmAction
       value: 
       objectReference: {fileID: 1244330305}
+    - target: {fileID: 8367392694602780467, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9136155787879817251, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
