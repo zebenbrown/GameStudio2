@@ -6,7 +6,7 @@ public class EnemyManager : MonoBehaviour
 {
     private List<GameObject> enemies = new List<GameObject>();
     [SerializeField] private List<Vector3> spawnBoundries = new List<Vector3>();
-    private int enemyCount;
+    private static int enemyCount;
     [SerializeField] private List<GameObject> enemyPrefabList = new List<GameObject>();
     
     //Spawn Bounds
@@ -31,10 +31,9 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        StartCoroutine(Co_Delay(8));
         if (enemyCount < 3)
         {
-            StartCoroutine(Co_Delay(3));
+            //StartCoroutine(Co_Delay(3));
             int type = Random.Range(0, 3);
             spawnEnemy((enemyType)type);
         }
@@ -70,5 +69,10 @@ public class EnemyManager : MonoBehaviour
     IEnumerator Co_Delay(float seconds)
     {
         yield return new WaitForSeconds(seconds);
+    }
+
+    public static void RemoveEnemy()
+    {
+        enemyCount--;
     }
 }

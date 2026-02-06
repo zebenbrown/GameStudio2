@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float speed = 5.0f;
 
-    private float health = 150;
+    private static float health = 150;
 
     //to have the camera follow the player
     [SerializeField] private Camera camera;
@@ -103,5 +103,10 @@ public class PlayerController : MonoBehaviour
     private void jump()
     {
         //dont know if we need this
+    }
+
+    public static void takeDamage(float damage)
+    {
+        health -= damage;
     }
 }

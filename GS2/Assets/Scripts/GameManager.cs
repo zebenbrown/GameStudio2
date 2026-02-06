@@ -13,7 +13,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<ArmSocketScript> ArmSockets;
 
     [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI killsText;
     private float timeRemaining = 180f;
+    public static int enemiesKilled;
 
     private void Awake()
     {
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        killsText.text = "Enemies killed: " + enemiesKilled;
         if (timeRemaining > 0)
         {
             timeRemaining -= Time.deltaTime;

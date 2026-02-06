@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class MeleeEnemy : MonoBehaviour
 {
-    private float health;
+    private static float health;
     private float speed;
 
     private NavMeshAgent agent;
@@ -26,5 +26,17 @@ public class MeleeEnemy : MonoBehaviour
     {
         healthText.text = "Health: " + health;
         agent.SetDestination(player.transform.position);
+
+        if (health <= 0)
+        {
+            EnemyManager.RemoveEnemy();
+            GameManager.enemiesKilled++;
+            Destroy(gameObject);
+        }
+    }
+
+    public static void takeDamage(float damage)
+    {
+        health -= damage;
     }
 }

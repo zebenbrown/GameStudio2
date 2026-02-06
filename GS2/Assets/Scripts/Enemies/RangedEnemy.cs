@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class RangedEnemy : MonoBehaviour
 {
-    private float health;
+    private static float health;
     private float speed;
     private NavMeshAgent agent;
     private GameObject player;
@@ -34,5 +34,17 @@ public class RangedEnemy : MonoBehaviour
         {
             agent.isStopped = false;
         }
+
+        if (health <= 0)
+        {
+            EnemyManager.RemoveEnemy();
+            GameManager.enemiesKilled++;
+            Destroy(gameObject);
+        }
+    }
+
+    public static void takeDamage(float damage)
+    {
+        health -= damage;
     }
 }
