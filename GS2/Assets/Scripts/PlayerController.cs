@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,8 +9,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float speed = 5.0f;
 
+    private float health = 150;
+
     //to have the camera follow the player
     [SerializeField] private Camera camera;
+    
+    [SerializeField] private TextMeshProUGUI healthText;
     
     
     private PlayerInput input;
@@ -34,6 +39,7 @@ public class PlayerController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         isPlaying = false;
+        healthText.text = "Health: " + health;
     }
 
     private void Update()

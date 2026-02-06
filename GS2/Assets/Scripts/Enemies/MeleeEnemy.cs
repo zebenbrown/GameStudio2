@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,6 +9,7 @@ public class MeleeEnemy : MonoBehaviour
 
     private NavMeshAgent agent;
     [SerializeField] private GameObject player;
+    [SerializeField] private TextMeshProUGUI healthText;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,6 +24,7 @@ public class MeleeEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        healthText.text = "Health: " + health;
         agent.SetDestination(player.transform.position);
     }
 }

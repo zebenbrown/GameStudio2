@@ -1,5 +1,7 @@
+using System;
 using NUnit.Framework;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,10 +12,25 @@ public class GameManager : MonoBehaviour
     private List<Arm_Base> AllArmsList;
     [SerializeField] private List<ArmSocketScript> ArmSockets;
 
+    [SerializeField] private TextMeshProUGUI timerText;
+    private float timeRemaining = 180f;
+
     private void Awake()
     {
         AllArmsList = new List<Arm_Base>();
         ArmSockets = new List<ArmSocketScript>();
+    }
+
+    private void Update()
+    {
+        if (timeRemaining > 0)
+        {
+            timeRemaining -= Time.deltaTime;
+            float minutes = Mathf.FloorToInt(timeRemaining / 60);
+            float seconds = Mathf.FloorToInt(timeRemaining % 60);
+            timerText.text = "Time Left - " + minutes.ToString("0") + ":" + seconds.ToString("00");
+            
+        }
     }
 
     public Material GetMaterial(string materialName)

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,6 +8,8 @@ public class RangedEnemy : MonoBehaviour
     private float speed;
     private NavMeshAgent agent;
     private GameObject player;
+
+    [SerializeField] private TextMeshProUGUI healthText;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,6 +23,7 @@ public class RangedEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        healthText.text = "Health: " + health;
         agent.SetDestination(player.transform.position);
         Debug.Log("Distance" + agent.remainingDistance);
         if (agent.remainingDistance <= 20)

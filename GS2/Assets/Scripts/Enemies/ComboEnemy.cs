@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,6 +8,7 @@ public class ComboEnemy : MonoBehaviour
     private float speed;
     private NavMeshAgent agent;
     private GameObject player;
+    [SerializeField] private TextMeshProUGUI healthText;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,6 +22,7 @@ public class ComboEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        healthText.text = "Health: " + health;
         agent.SetDestination(player.transform.position);
     }
 }
