@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private float speed = 5.0f;
 
     //to have the camera follow the player
-    [SerializeField] private new Camera camera;
+    [SerializeField] private Camera camera;
     
     
     private PlayerInput input;
