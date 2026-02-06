@@ -135,7 +135,7 @@ MonoBehaviour:
   rangeIndicator: {fileID: 6816389643912621240}
   BulletPrefab: {fileID: 8576327340388006737, guid: 53e2c7969ad3bf34d91c0327ea78aba3, type: 3}
   BulletReleasePoint: {fileID: 1269118483910906435}
-  shootSound: {fileID: 0}
+  shootSounds: []
 --- !u!54 &7956114046303583565
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -158,7 +158,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
