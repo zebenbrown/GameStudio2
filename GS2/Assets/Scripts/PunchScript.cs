@@ -56,4 +56,22 @@ public class PunchScript : Arm_Base
     {
         PunchForward();
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("ComboEnemy"))
+        {
+            ComboEnemy.takeDamage(34);
+        }
+        
+        if (collision.gameObject.CompareTag("RangedEnemy"))
+        {
+            RangedEnemy.takeDamage(34);
+        }
+        
+        if (collision.gameObject.CompareTag("MeleeEnemy"))
+        {
+            MeleeEnemy.takeDamage(34);
+        }
+    }
 }

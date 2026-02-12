@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8041288392989807881}
   - component: {fileID: 8746593926701421467}
   - component: {fileID: 1085840913156638830}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Punch_Fist
   m_TagString: Arm
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 3677991139768741923}
   - component: {fileID: 3080184730392471374}
   - component: {fileID: 1800347918086854606}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Range_Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,6 +470,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 632b8502e3eb5e34f86aa86cae4f460d, type: 3}
       propertyPath: m_Name
       value: SM_ARM
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 632b8502e3eb5e34f86aa86cae4f460d, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
