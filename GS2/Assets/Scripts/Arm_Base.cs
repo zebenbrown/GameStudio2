@@ -44,7 +44,9 @@ public abstract class Arm_Base : MonoBehaviour
     {
         transform.parent = armSocket;
         attachedArmSocket = armSocket.GetComponent<ArmSocketScript>();
-        ResetTransform();
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+        //ResetTransform();
         rb.constraints = RigidbodyConstraints.FreezeAll;
         collider.enabled = false;
 
@@ -54,11 +56,11 @@ public abstract class Arm_Base : MonoBehaviour
 
         if (attachedArmSocket.gameObject.name == "Arm_Socket_R")
         {
-            transform.rotation = new Quaternion(0.0f, 0.0f, 180.0f, 1.0f);
+            transform.localRotation = new Quaternion(0.0f, 0.0f, 180.0f, 1.0f);
         }
         else
         {
-            transform.rotation = Quaternion.identity;
+            transform.localRotation = Quaternion.identity;
         }
 
         SpecificEquip();
@@ -95,7 +97,8 @@ public abstract class Arm_Base : MonoBehaviour
 
     protected void ResetTransform()
     {
-        transform.SetLocalPositionAndRotation(Vector3.zero, startRotation);
+        //transform.SetLocalPositionAndRotation(Vector3.zero, startRotation);
+        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
 
     public bool IsEquipped() { return isEquipped; }
