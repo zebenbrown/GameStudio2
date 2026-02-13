@@ -51,7 +51,10 @@ public class PartDetection : MonoBehaviour
         }
         else
         {
-            armSocket.DropArm();
+            if (armSocket.IsEquipped())
+            {
+                armSocket.DropArm();
+            }
         }
     }
 
