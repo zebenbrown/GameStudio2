@@ -13,13 +13,13 @@ public class Fire : Arm_Base
     [SerializeField] private List<AudioClip> shootSounds;
     private AudioSource audioSource;
 
-    const float forwardForceFloat = 1000;
+    const float forwardForceFloat = 25;
     Vector3 forwardForceVector;
 
 
     protected override void ArmSpecificStart()
     {
-        startRotation = Quaternion.Euler(90.0f, 0.0f, 0.0f);
+        startRotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
 
         forwardForceVector = Vector3.forward;
         forwardForceVector.z += forwardForceFloat;
@@ -46,11 +46,15 @@ public class Fire : Arm_Base
     {
         GameObject bullet = Instantiate(BulletPrefab, BulletReleasePoint);
 
-        bullet.GetComponent<Rigidbody>().AddForce(forwardForceVector);
+        bullet.GetComponent<Rigidbody>().AddForce(BulletReleasePoint.forward * forwardForceFloat, ForceMode.Impulse);
+        Collider bulletCollider = bullet.GetComponent<Collider>();
+        Collider playerCollider = bullet.GetComponentInParent<Collider>();
+        
+        Physics.IgnoreCollision(bulletCollider, playerCollider);
         bullet.transform.SetParent(null);
 
-        audioSource.generator = GetRandomShootSound();
-        audioSource.Play();
+        //audioSource.generator = GetRandomShootSound();
+        //audioSource.Play();
     }
 
     private AudioClip GetRandomShootSound()
