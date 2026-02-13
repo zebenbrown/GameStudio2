@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -24,6 +26,8 @@ public class MeleeEnemy : Enemy
         agent.speed = speed;
         
         player = GameObject.FindGameObjectWithTag("Player");
+
+        deactivateArmPickup();
     }
 
     // Update is called once per frame
@@ -57,5 +61,16 @@ public class MeleeEnemy : Enemy
     public float getHealth()
     {
         return health;
+    }
+
+    private void deactivateArmPickup()
+    {
+        Arm_Base[] armList = GetComponentsInChildren<Arm_Base>();
+
+        foreach (Arm_Base arm in armList)
+        {
+            arm.DisableIndicator();
+            arm.isEnemyArm = true;
+        }
     }
 }
