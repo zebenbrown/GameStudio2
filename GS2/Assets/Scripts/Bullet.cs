@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Destroy(gameObject, 8.0f);
+        Destroy(gameObject, 5.0f);
     }
 
     // Update is called once per frame
@@ -19,10 +19,10 @@ public class Bullet : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         Debug.Log($"Hit: {collision.gameObject.name}, Layer: {LayerMask.LayerToName(collision.gameObject.layer)}");
-        if (collision.gameObject.CompareTag("Player"))
+        /*if (collision.gameObject.CompareTag("Player"))
         {
             PlayerController.takeDamage(20);
-        }
+        }*/
 
         if (collision.gameObject.CompareTag("MeleeEnemy"))
         {
