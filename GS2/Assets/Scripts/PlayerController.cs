@@ -6,13 +6,10 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     //private PlayerControls controls;
-    [SerializeField]
-    private float speed = 5.0f;
-
     private static float health = 150;
 
     //to have the camera follow the player
-    [SerializeField] private Camera camera;
+    [SerializeField] new private Camera camera;
     
     [SerializeField] private TextMeshProUGUI healthText;
     
@@ -22,11 +19,12 @@ public class PlayerController : MonoBehaviour
     private InputAction jumpAction;
 
     private AudioSource audioSource;
-
     private bool isPlaying;
-    
 
-    private bool isMoving = false;
+    [SerializeField] private float maxSpeed = 6f;
+    [SerializeField] private float acceleration = 20f;
+    [SerializeField] private float deceleration = 25f;
+    private Vector3 currentVelocity = Vector3.zero;
 
     private void Awake()
     {
@@ -76,18 +74,28 @@ public class PlayerController : MonoBehaviour
         
         Vector2 movementValues = moveAction.ReadValue<Vector2>();
         Vector3 movement = new Vector3(movementValues.x, 0f, movementValues.y);
+        Vector3 inputDirection = new Vector3(movementValues.x, 0f, movementValues.y);
 
         if (movement.sqrMagnitude > 0.001f)
         {
-            // Move
-            transform.position += movement * speed * Time.deltaTime;
+            inputDirection.Normalize();
+
+            //Accelerate to target speed
+            Vector3 targetVelocity = inputDirection * maxSpeed;
+            currentVelocity = Vector3.MoveTowards(currentVelocity, targetVelocity, acceleration * Time.deltaTime);
 
             // Rotate to face movement direction
             Quaternion targetRotation = Quaternion.LookRotation(movement, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15f * Time.deltaTime);
         }
-        
-        
+        else
+        {
+            //Decelerate to stop
+            currentVelocity = Vector3.MoveTowards(currentVelocity, Vector3.zero, deceleration * Time.deltaTime);
+        }
+
+        transform.position += currentVelocity * Time.deltaTime;
+
 
         if ((movement.x != 0) || (movement.z != 0))
         {
@@ -106,7 +114,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        camera.transform.position += new Vector3(movement.x, 0, movement.z) * speed * Time.deltaTime;
+        camera.transform.position += currentVelocity * Time.deltaTime;
 
         /*if ((movement.x != 0) || (movement.y != 0))
         {

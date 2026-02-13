@@ -1238,13 +1238,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 632847195}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
-  m_LocalPosition: {x: 0, y: 0, z: -18}
+  m_LocalRotation: {x: 0.36029068, y: -0, z: -0, w: 0.93284005}
+  m_LocalPosition: {x: 0, y: -1.61, z: -17.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2005694292}
-  m_LocalEulerAnglesHint: {x: 35, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 42.236, y: 0, z: 0}
 --- !u!114 &632847197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2412,9 +2412,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 632847199}
     - target: {fileID: 4227986080709768983, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
+      propertyPath: maxSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4227986080709768983, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
       propertyPath: healthText
       value: 
       objectReference: {fileID: 373607841}
+    - target: {fileID: 4227986080709768983, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
+      propertyPath: acceleration
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4311293486499552098, guid: f310ce38e68dee54b84e391d7ee7656c, type: 3}
       propertyPath: m_Layer
       value: 8
