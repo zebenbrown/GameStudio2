@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PunchScript : Arm_Base
 {
     [SerializeField] private AnimationClip punchAnimationClip;
+
     private string punchAnimationClipName;
     private Animator animator;
     private float animationTimer = 0;
@@ -59,19 +60,51 @@ public class PunchScript : Arm_Base
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("ComboEnemy"))
+        /*if (collision.gameObject.CompareTag("ComboEnemy"))
         {
             ComboEnemy.takeDamage(34);
         }
-        
+
         if (collision.gameObject.CompareTag("RangedEnemy"))
         {
             RangedEnemy.takeDamage(34);
         }
-        
+
         if (collision.gameObject.CompareTag("MeleeEnemy"))
         {
             MeleeEnemy.takeDamage(34);
+        }*/
+
+
+        /*if (collision.gameObject.CompareTag("MeleeEnemy"))
+        {
+            meleeEnemy.GetComponent<MeleeEnemy>();
+            meleeEnemy.takeDamage(34);
+            Destroy(gameObject);
         }
+
+
+        if (collision.gameObject.CompareTag("RangedEnemy"))
+        {
+            rangedEnemy.GetComponent<RangedEnemy>();
+            rangedEnemy.takeDamage(34);
+            Destroy(gameObject);
+        }
+
+
+        if (collision.gameObject.CompareTag("ComboEnemy"))
+        {
+            comboEnemy.GetComponent<ComboEnemy>();
+            comboEnemy.takeDamage(34);
+            Destroy(gameObject);
+        }*/
+
+        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.takeDamage(34);
+        }
+        
     }
+    
 }

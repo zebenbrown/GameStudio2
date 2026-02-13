@@ -2,10 +2,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RangedEnemy : MonoBehaviour
+public class RangedEnemy : Enemy
 {
-    private static float health;
+    private float health;
     private float speed;
+    private bool isDead = false;
     private NavMeshAgent agent;
     private GameObject player;
 
@@ -23,27 +24,29 @@ public class RangedEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDead) return;
+        
         healthText.text = "Health: " + health;
         agent.SetDestination(player.transform.position);
-        if (agent.remainingDistance <= 20)
-        {
-           agent.isStopped = true;
-        }
-        else
-        {
-            agent.isStopped = false;
-        }
-
-        if (health <= 0)
-        {
-            EnemyManager.RemoveEnemy();
-            GameManager.enemiesKilled++;
-            Destroy(gameObject);
-        }
     }
 
-    public static void takeDamage(float damage)
+    public override void takeDamage(float damage)
     {
+        if (isDead) return;
+        
         health -= damage;
+        Debug.Log("Melee Enemy: " + health);
+
+        if (health <= 0)
+            die();
+    }
+
+    private void die()
+    {
+        isDead = true;
+        
+        EnemyManager.RemoveEnemy();
+        GameManager.enemiesKilled++;
+        Destroy(gameObject);
     }
 }

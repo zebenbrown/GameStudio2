@@ -153,3 +153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9bd738bf562c2e48a7eb6340d3be662, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
+  meleeEnemy: {fileID: 6778441839684319424, guid: 9c6ba952676f0674b90b11ddf38cdcd1, type: 3}
+  rangedEnemy: {fileID: 8429202588882496514, guid: 7f11fb568d0a4294792b327204dd5872, type: 3}
+  comboEnemy: {fileID: 1619109342636598004, guid: bfb6a3863c769c44fb55881ae11141ec, type: 3}

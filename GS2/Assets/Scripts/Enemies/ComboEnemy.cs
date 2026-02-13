@@ -2,10 +2,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ComboEnemy : MonoBehaviour
+public class ComboEnemy : Enemy
 {
-    private static float health;
+    private float health;
     private float speed;
+    private bool isDead = false;
     private NavMeshAgent agent;
     private GameObject player;
     [SerializeField] private TextMeshProUGUI healthText;
@@ -22,19 +23,29 @@ public class ComboEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDead) return;
+        
         healthText.text = "Health: " + health;
         agent.SetDestination(player.transform.position);
-
-        if (health <= 0)
-        {
-            EnemyManager.RemoveEnemy();
-            GameManager.enemiesKilled++;
-            Destroy(gameObject);
-        }
     }
 
-    public static void takeDamage(float damage)
+    public override void takeDamage(float damage)
     {
+        if (isDead) return;
+        
         health -= damage;
+        Debug.Log("Melee Enemy: " + health);
+
+        if (health <= 0)
+            die();
+    }
+
+    private void die()
+    {
+        isDead = true;
+        
+        EnemyManager.RemoveEnemy();
+        GameManager.enemiesKilled++;
+        Destroy(gameObject);
     }
 }

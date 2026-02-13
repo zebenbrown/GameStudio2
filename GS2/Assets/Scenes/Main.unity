@@ -171,6 +171,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arm_Gun
       objectReference: {fileID: 0}
+    - target: {fileID: 3628174443110554235, guid: af549d1a1d6c9a44a83e77855240a7f7, type: 3}
+      propertyPath: shootSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3628174443110554235, guid: af549d1a1d6c9a44a83e77855240a7f7, type: 3}
+      propertyPath: 'shootSounds.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 30a040150b9c16f4ba3f28e693102d30, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -228,6 +236,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arm_Gun (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3628174443110554235, guid: af549d1a1d6c9a44a83e77855240a7f7, type: 3}
+      propertyPath: shootSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3628174443110554235, guid: af549d1a1d6c9a44a83e77855240a7f7, type: 3}
+      propertyPath: 'shootSounds.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 30a040150b9c16f4ba3f28e693102d30, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1057,6 +1073,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Punch_Fist
       objectReference: {fileID: 0}
+    - target: {fileID: 8746593926701421467, guid: 5c1f5b3bfd0980d45a45cd22f8ab4e5a, type: 3}
+      propertyPath: comboEnemy
+      value: 
+      objectReference: {fileID: 1619109342636598004, guid: bfb6a3863c769c44fb55881ae11141ec, type: 3}
+    - target: {fileID: 8746593926701421467, guid: 5c1f5b3bfd0980d45a45cd22f8ab4e5a, type: 3}
+      propertyPath: meleeEnemy
+      value: 
+      objectReference: {fileID: 6778441839684319424, guid: 9c6ba952676f0674b90b11ddf38cdcd1, type: 3}
+    - target: {fileID: 8746593926701421467, guid: 5c1f5b3bfd0980d45a45cd22f8ab4e5a, type: 3}
+      propertyPath: rangedEnemy
+      value: 
+      objectReference: {fileID: 8429202588882496514, guid: 7f11fb568d0a4294792b327204dd5872, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -1586,6 +1614,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Punch_Fist (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8746593926701421467, guid: 5c1f5b3bfd0980d45a45cd22f8ab4e5a, type: 3}
+      propertyPath: comboEnemy
+      value: 
+      objectReference: {fileID: 1619109342636598004, guid: bfb6a3863c769c44fb55881ae11141ec, type: 3}
+    - target: {fileID: 8746593926701421467, guid: 5c1f5b3bfd0980d45a45cd22f8ab4e5a, type: 3}
+      propertyPath: meleeEnemy
+      value: 
+      objectReference: {fileID: 6778441839684319424, guid: 9c6ba952676f0674b90b11ddf38cdcd1, type: 3}
+    - target: {fileID: 8746593926701421467, guid: 5c1f5b3bfd0980d45a45cd22f8ab4e5a, type: 3}
+      propertyPath: rangedEnemy
+      value: 
+      objectReference: {fileID: 8429202588882496514, guid: 7f11fb568d0a4294792b327204dd5872, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

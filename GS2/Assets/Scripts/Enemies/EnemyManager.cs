@@ -23,9 +23,9 @@ public class EnemyManager : MonoBehaviour
         // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        spawnEnemy(enemyType.Combo);
-        spawnEnemy(enemyType.Ranged);
-        spawnEnemy(enemyType.Melee);
+       spawnEnemy(enemyType.Combo);
+       spawnEnemy(enemyType.Ranged);
+       spawnEnemy(enemyType.Melee);
     }
 
     // Update is called once per frame
