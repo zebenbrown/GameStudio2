@@ -25,7 +25,6 @@ public class RangedEnemy : MonoBehaviour
     {
         healthText.text = "Health: " + health;
         agent.SetDestination(player.transform.position);
-        Debug.Log("Distance" + agent.remainingDistance);
         if (agent.remainingDistance <= 20)
         {
            agent.isStopped = true;
