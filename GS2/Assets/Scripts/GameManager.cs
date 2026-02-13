@@ -23,6 +23,11 @@ public class GameManager : MonoBehaviour
         ArmSockets = new List<ArmSocketScript>();
     }
 
+    private void Start()
+    {
+        
+    }
+
     private void Update()
     {
         killsText.text = "Enemies killed: " + enemiesKilled;
@@ -63,7 +68,7 @@ public class GameManager : MonoBehaviour
 
         if (bothEquipped)
         {
-            DisableIndicators();
+            //DisableIndicators();
         }
     }
 

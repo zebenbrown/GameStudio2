@@ -14,6 +14,7 @@ public abstract class Arm_Base : MonoBehaviour
     protected ArmSocketScript attachedArmSocket;
 
     protected bool isEquipped = false;
+    public bool isEnemyArm = false;
 
     private void Start()
     {
@@ -48,6 +49,7 @@ public abstract class Arm_Base : MonoBehaviour
         transform.localRotation = Quaternion.identity;
         //ResetTransform();
         rb.constraints = RigidbodyConstraints.FreezeAll;
+        rb.useGravity = false;
         collider.enabled = false;
 
         isEquipped = true;
@@ -78,6 +80,7 @@ public abstract class Arm_Base : MonoBehaviour
         transform.parent = null;
         attachedArmSocket = null;
         rb.constraints = RigidbodyConstraints.None;
+        rb.useGravity = true;
         collider.enabled = true;
 
         isEquipped = false;

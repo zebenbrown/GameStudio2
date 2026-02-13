@@ -129,7 +129,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SwapRightArm"",
+                    ""name"": ""swapRightArm"",
                     ""type"": ""Button"",
                     ""id"": ""17798c0c-0975-40a5-b688-b5b64f9eae66"",
                     ""expectedControlType"": """",
@@ -243,7 +243,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SwapRightArm"",
+                    ""action"": ""swapRightArm"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -269,7 +269,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Regular_Jump = m_Regular.FindAction("Jump", throwIfNotFound: true);
         m_Regular_RightArmActivate = m_Regular.FindAction("RightArmActivate", throwIfNotFound: true);
         m_Regular_LeftArmActivate = m_Regular.FindAction("LeftArmActivate", throwIfNotFound: true);
-        m_Regular_SwapRightArm = m_Regular.FindAction("SwapRightArm", throwIfNotFound: true);
+        m_Regular_SwapRightArm = m_Regular.FindAction("swapRightArm", throwIfNotFound: true);
         m_Regular_SwapLeftArm = m_Regular.FindAction("SwapLeftArm", throwIfNotFound: true);
     }
 
@@ -385,7 +385,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @LeftArmActivate => m_Wrapper.m_Regular_LeftArmActivate;
         /// <summary>
-        /// Provides access to the underlying input action "Regular/SwapRightArm".
+        /// Provides access to the underlying input action "Regular/swapRightArm".
         /// </summary>
         public InputAction @SwapRightArm => m_Wrapper.m_Regular_SwapRightArm;
         /// <summary>
@@ -534,7 +534,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnLeftArmActivate(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "SwapRightArm" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "swapRightArm" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
