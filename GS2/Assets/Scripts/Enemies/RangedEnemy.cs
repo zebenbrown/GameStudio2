@@ -4,10 +4,6 @@ using UnityEngine.AI;
 
 public class RangedEnemy : Enemy
 {
-    private float health;
-    private float speed;
-    private bool isDead = false;
-    private NavMeshAgent agent;
     private GameObject player;
 
     [SerializeField] private TextMeshProUGUI healthText;

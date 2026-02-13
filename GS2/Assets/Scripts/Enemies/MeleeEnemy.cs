@@ -6,11 +6,6 @@ using UnityEngine.AI;
 
 public class MeleeEnemy : Enemy
 {
-    private float health;
-    private float speed;
-    private bool isDead = false;
-
-    private NavMeshAgent agent;
     [SerializeField] private GameObject player;
     [SerializeField] private TextMeshProUGUI healthText;
     
