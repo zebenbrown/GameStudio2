@@ -17,6 +17,8 @@ public class ComboEnemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.speed = speed;
         player = GameObject.FindGameObjectWithTag("Player");
+
+        deactivateArmPickup();
     }
 
     // Update is called once per frame
@@ -36,5 +38,16 @@ public class ComboEnemy : MonoBehaviour
     public static void takeDamage(float damage)
     {
         health -= damage;
+    }
+
+    private void deactivateArmPickup()
+    {
+        Arm_Base[] armList = GetComponentsInChildren<Arm_Base>();
+
+        foreach (Arm_Base arm in armList)
+        {
+            arm.DisableIndicator();
+            arm.isEnemyArm = true;
+        }
     }
 }

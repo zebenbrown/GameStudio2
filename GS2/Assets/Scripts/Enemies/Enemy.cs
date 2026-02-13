@@ -41,6 +41,15 @@ public class Enemy : MonoBehaviour
             health = Random.Range(120, 141);
             speed = Random.Range(5, 8);
         }
+
+        foreach (GameObject armObj in armList)
+        {
+            if (armObj.TryGetComponent<Arm_Base>(out Arm_Base arm))
+            {
+                arm.DisableIndicator();
+                arm.isEnemyArm = true;
+            }
+        }
     }
 
     // Update is called once per frame
