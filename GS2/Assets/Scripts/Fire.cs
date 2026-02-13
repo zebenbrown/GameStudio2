@@ -53,8 +53,8 @@ public class Fire : Arm_Base
         Physics.IgnoreCollision(bulletCollider, playerCollider);
         bullet.transform.SetParent(null);
 
-        //audioSource.generator = GetRandomShootSound();
-        //audioSource.Play();
+        audioSource.generator = GetRandomShootSound();
+        audioSource.Play();
     }
 
     private AudioClip GetRandomShootSound()

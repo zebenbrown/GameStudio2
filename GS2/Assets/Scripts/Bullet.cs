@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] private MeleeEnemy meleeEnemy;
+
+    [SerializeField] private RangedEnemy rangedEnemy;
+
+    [SerializeField] private ComboEnemy comboEnemy;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Destroy(gameObject, 5.0f);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void OnCollisionEnter(Collision collision)
@@ -24,21 +23,33 @@ public class Bullet : MonoBehaviour
             PlayerController.takeDamage(20);
         }*/
 
-        if (collision.gameObject.CompareTag("MeleeEnemy"))
+        /*if (collision.gameObject.CompareTag("MeleeEnemy"))
         {
-            MeleeEnemy.takeDamage(20);
+            meleeEnemy.GetComponent<MeleeEnemy>();
+            meleeEnemy.takeDamage(20);
             Destroy(gameObject);
         }
+
 
         if (collision.gameObject.CompareTag("RangedEnemy"))
         {
-            RangedEnemy.takeDamage(20);
+            rangedEnemy.GetComponent<RangedEnemy>();
+            rangedEnemy.takeDamage(20);
             Destroy(gameObject);
         }
 
+
         if (collision.gameObject.CompareTag("ComboEnemy"))
         {
-            ComboEnemy.takeDamage(20);
+            comboEnemy.GetComponent<ComboEnemy>();
+            comboEnemy.takeDamage(20);
+            Destroy(gameObject);
+        }*/
+
+        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.takeDamage(20);
             Destroy(gameObject);
         }
     }
