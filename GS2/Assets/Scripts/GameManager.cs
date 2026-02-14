@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,18 +15,17 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI killsText;
+   
     private float timeRemaining = 180f;
-    public static int enemiesKilled;
+    public int enemiesKilled;
+    
+    public static GameManager instance;
 
     private void Awake()
     {
         AllArmsList = new List<Arm_Base>();
         ArmSockets = new List<ArmSocketScript>();
-    }
-
-    private void Start()
-    {
-        
+        instance = this;
     }
 
     private void Update()
@@ -38,6 +38,11 @@ public class GameManager : MonoBehaviour
             float seconds = Mathf.FloorToInt(timeRemaining % 60);
             timerText.text = "Time Left - " + minutes.ToString("0") + ":" + seconds.ToString("00");
             
+        }
+
+        if (timeRemaining <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
         }
     }
 
@@ -99,5 +104,10 @@ public class GameManager : MonoBehaviour
     public void RegisterSocket(ArmSocketScript socket)
     {
         ArmSockets.Add(socket);
+    }
+
+    public void loadScene(string scene)
+    {
+        SceneManager.LoadScene(scene);
     }
 }

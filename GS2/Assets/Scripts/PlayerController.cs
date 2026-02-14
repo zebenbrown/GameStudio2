@@ -6,10 +6,10 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     //private PlayerControls controls;
-    private static float health = 150;
+    private float health = 150;
 
     //to have the camera follow the player
-    [SerializeField] new private Camera camera;
+    [SerializeField] private Camera camera;
     
     [SerializeField] private TextMeshProUGUI healthText;
     
@@ -38,6 +38,10 @@ public class PlayerController : MonoBehaviour
 
         isPlaying = false;
         healthText.text = "Health: " + health;
+        
+        var pause = GetComponent<PlayerInput>()
+            .actions.FindAction("Pause");
+
     }
 
     private void Update()
@@ -150,7 +154,7 @@ public class PlayerController : MonoBehaviour
         //dont know if we need this
     }
 
-    public static void takeDamage(float damage)
+    public void takeDamage(float damage)
     {
         health -= damage;
     }

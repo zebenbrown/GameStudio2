@@ -145,6 +145,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""d807d4ff-c024-4c81-9c50-472f84e4942a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -257,6 +266,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""SwapLeftArm"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ab3efd84-b9ca-4a27-8c85-e31090f6ec0e"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -271,6 +291,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Regular_LeftArmActivate = m_Regular.FindAction("LeftArmActivate", throwIfNotFound: true);
         m_Regular_SwapRightArm = m_Regular.FindAction("SwapRightArm", throwIfNotFound: true);
         m_Regular_SwapLeftArm = m_Regular.FindAction("SwapLeftArm", throwIfNotFound: true);
+        m_Regular_Pause = m_Regular.FindAction("Pause", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -357,6 +378,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Regular_LeftArmActivate;
     private readonly InputAction m_Regular_SwapRightArm;
     private readonly InputAction m_Regular_SwapLeftArm;
+    private readonly InputAction m_Regular_Pause;
     /// <summary>
     /// Provides access to input actions defined in input action map "Regular".
     /// </summary>
@@ -392,6 +414,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Regular/SwapLeftArm".
         /// </summary>
         public InputAction @SwapLeftArm => m_Wrapper.m_Regular_SwapLeftArm;
+        /// <summary>
+        /// Provides access to the underlying input action "Regular/Pause".
+        /// </summary>
+        public InputAction @Pause => m_Wrapper.m_Regular_Pause;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -436,6 +462,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SwapLeftArm.started += instance.OnSwapLeftArm;
             @SwapLeftArm.performed += instance.OnSwapLeftArm;
             @SwapLeftArm.canceled += instance.OnSwapLeftArm;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         /// <summary>
@@ -465,6 +494,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SwapLeftArm.started -= instance.OnSwapLeftArm;
             @SwapLeftArm.performed -= instance.OnSwapLeftArm;
             @SwapLeftArm.canceled -= instance.OnSwapLeftArm;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         /// <summary>
@@ -547,5 +579,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSwapLeftArm(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPause(InputAction.CallbackContext context);
     }
 }

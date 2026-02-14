@@ -6,8 +6,10 @@ public class EnemyManager : MonoBehaviour
 {
     private List<GameObject> enemies = new List<GameObject>();
     [SerializeField] private List<Vector3> spawnBoundries = new List<Vector3>();
-    private static int enemyCount;
+    private int enemyCount;
     [SerializeField] private List<GameObject> enemyPrefabList = new List<GameObject>();
+
+    public static EnemyManager instance;
     
     //Spawn Bounds
     float minX = -50, maxX = 50;
@@ -18,6 +20,11 @@ public class EnemyManager : MonoBehaviour
         Combo,
         Ranged,
         Melee
+    }
+
+    private void Awake()
+    {
+        instance = this;
     }
     
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -71,7 +78,7 @@ public class EnemyManager : MonoBehaviour
         yield return new WaitForSeconds(seconds);
     }
 
-    public static void RemoveEnemy()
+    public void RemoveEnemy()
     {
         enemyCount--;
     }

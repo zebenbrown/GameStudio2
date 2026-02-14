@@ -43,8 +43,8 @@ public class RangedEnemy : Enemy
     {
         isDead = true;
         
-        EnemyManager.RemoveEnemy();
-        GameManager.enemiesKilled++;
+        EnemyManager.instance.RemoveEnemy();
+        GameManager.instance.enemiesKilled++;
         Destroy(gameObject);
     }
 
