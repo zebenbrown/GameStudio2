@@ -16,7 +16,6 @@ public class Fire : Arm_Base
     const float forwardForceFloat = 25;
     Vector3 forwardForceVector;
 
-
     protected override void ArmSpecificStart()
     {
         startRotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
@@ -55,6 +54,22 @@ public class Fire : Arm_Base
 
         audioSource.generator = GetRandomShootSound();
         audioSource.Play();
+    }
+
+    private void OnLook(InputValue value)
+    {
+        Vector2 mousePos;
+        mousePos = Camera.main.ScreenToWorldPoint(value.Get<Vector2>());
+        AimAt(mousePos);
+    }
+
+    protected void AimAt(Vector3 target)
+    {
+        //float lookAngle = target.y;
+        //transform.eulerAngles = new Vector3(0, lookAngle, 0);
+        //Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, target);
+        Quaternion targetRotation = Quaternion.Euler(0, target.y, 0);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15f * Time.deltaTime);
     }
 
     private AudioClip GetRandomShootSound()
