@@ -17,6 +17,8 @@ public class PunchScript : Arm_Base
         animator = GetComponent<Animator>();
         punchAnimationClipName = punchAnimationClip.name;
         animator.enabled = false;
+
+        collider = GetComponentInChildren<Collider>();
     }
 
     protected override void specificEquip()
@@ -53,50 +55,11 @@ public class PunchScript : Arm_Base
         PunchForward();
     }
 
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Collision with: " + collision.gameObject.name);
-        
-        if (GetComponentInParent<PlayerController>() == null)
-        {
-            return;
-        }
-
-        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-        if (enemy != null)
-        {
-            enemy.takeDamage(34);
-        }
-
-        /*if (transform.parent.parent.CompareTag("Player"))
-        {
-            if (collision.gameObject.CompareTag("MeleeEnemy") || collision.gameObject.CompareTag("RangedEnemy") ||
-                collision.gameObject.CompareTag("ComboEnemy"))
-            {
-                Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-                if (enemy != null)
-                    enemy.takeDamage(34);
-            }
-        }
-
-        else
-        {
-            return;
-        }#1#
-    }*/
-
     private void OnTriggerEnter(Collider other)
     {
-        if (CompareTag("EnemyArm"))
-        {
-            comboEnemy.GetComponent<ComboEnemy>();
-            comboEnemy.takeDamage(34);
-            Destroy(gameObject);
-        }*/
-
         if (!isEnemyArm)
         {
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
             if (enemy != null)
             {
                 enemy.takeDamage(34);
@@ -104,14 +67,12 @@ public class PunchScript : Arm_Base
         }
         else
         {
-            /*
-            if (collision.gameObject == gameManager.getPlayer().gameObject)
+            
+            if (other.gameObject == gameManager.getPlayer().gameObject)
             {
 
-            }
-            */
-        }
-        
+            }   
+        }   
     }
 
     protected override void playActivateSound()
