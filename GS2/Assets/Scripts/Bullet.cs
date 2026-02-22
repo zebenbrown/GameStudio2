@@ -8,6 +8,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] private Material bulletMaterial;
     private Color color;
 
+    public bool isPlayers = false;
+
     private Animator animator;
     [SerializeField] private AnimationClip destroyClip;
 
@@ -21,7 +23,6 @@ public class Bullet : MonoBehaviour
     {
         color = bulletMaterial.color;
         animator = GetComponent<Animator>();
-        
 
         Destroy(gameObject, 5.0f);
     }
@@ -65,19 +66,26 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemy))
         {
             //Debug.Log($"Hit: {collision.gameObject.name}, Layer: {LayerMask.LayerToName(collision.gameObject.layer)}");
-
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            animator.Play(destroyClip.name);
             enemy.takeDamage(BULLET_DAMAGE);
+
+            Destroy(gameObject, 0.4f);
         }
         if (collision.gameObject.TryGetComponent<PlayerController>(out PlayerController player))
         {
             //Debug.LogWarning($"Hit: {collision.gameObject.name}, Layer: {LayerMask.LayerToName(collision.gameObject.layer)}");
+            if (!isPlayers)
+            {
+                GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                animator.Play(destroyClip.name);
+                player.takeDamage(BULLET_DAMAGE);
 
-            player.takeDamage(BULLET_DAMAGE);
+                Destroy(gameObject, 0.4f);
+            }
         }
 
-        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        animator.Play(destroyClip.name);
-        //Destroy(gameObject);
+        
     }
 
     private void updateTransparency()

@@ -47,6 +47,11 @@ public class Fire : Arm_Base
     {
         GameObject bullet = Instantiate(BulletPrefab, BulletReleasePoint);
 
+        if (!isEnemyArm)
+        {
+            bullet.GetComponent<Bullet>().isPlayers = true;
+        }
+
         bullet.GetComponent<Rigidbody>().AddForce(BulletReleasePoint.forward * forwardForceFloat, ForceMode.Impulse);
         Collider bulletCollider = bullet.GetComponent<Collider>();
         Collider playerCollider = bullet.GetComponentInParent<Collider>();
