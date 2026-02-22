@@ -200,8 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc8697bf1597b3645b8f0a0b8fefd71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArmSocketScript
-  otherArmSocket: {fileID: 5142773179032784731}
-  ArmsInRange: []
+  AttachedArm: {fileID: 0}
   swapArmAction: {fileID: 0}
   armAction: {fileID: 0}
 --- !u!1 &2479017305602448542
@@ -323,9 +322,9 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
+  m_Radius: 0.4
+  m_Height: 2.1
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2471309850958260778
 MonoBehaviour:
@@ -466,8 +465,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b40ee142d2081e4e863b1d7313c2759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeEnemy
-  player: {fileID: 0}
   healthText: {fileID: 6754729624634832424}
+  armList: []
+  attackCooldown: 0
+  attackCooldownTimer: 2
+  attackDistance: 10
 --- !u!195 &-5046670015432629287
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -752,8 +754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc8697bf1597b3645b8f0a0b8fefd71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArmSocketScript
-  otherArmSocket: {fileID: 6392487709266995964}
-  ArmsInRange: []
+  AttachedArm: {fileID: 0}
   swapArmAction: {fileID: 0}
   armAction: {fileID: 0}
 --- !u!1 &6884590035269912493
@@ -999,7 +1000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8746593926701421467, guid: 5c1f5b3bfd0980d45a45cd22f8ab4e5a, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

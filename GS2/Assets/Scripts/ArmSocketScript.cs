@@ -39,7 +39,7 @@ public class ArmSocketScript : MonoBehaviour
     {
         if (AttachedArm != null)
         {
-            AttachedArm.ArmMainAction();
+            AttachedArm.armMainAction();
         }
     }
 
@@ -47,7 +47,7 @@ public class ArmSocketScript : MonoBehaviour
     {
         if (AttachedArm != null)
         {
-            AttachedArm.DropArm();
+            AttachedArm.dropArm();
             AttachedArm.transform.position += new Vector3(0.0f, 1.0f, 0.0f);
 
             //partDetector.addArm(AttachedArm);
@@ -57,7 +57,7 @@ public class ArmSocketScript : MonoBehaviour
         partDetector.removeArm(AttachedArm);
         //Debug.Log("(Socket) Removed Arm: " + AttachedArm.name + "\nArms in range: " + partDetector.ArmsInRange.Count);
 
-        AttachedArm.EquipArm(transform);
+        AttachedArm.equipArm(transform);
 
         isEquipped = true;
 
@@ -66,7 +66,7 @@ public class ArmSocketScript : MonoBehaviour
 
     public void DropArm()
     {
-        AttachedArm.DropArm();
+        AttachedArm.dropArm();
         AttachedArm = null;
         isEquipped = false;
 

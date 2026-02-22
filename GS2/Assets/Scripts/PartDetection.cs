@@ -101,11 +101,11 @@ public class PartDetection : MonoBehaviour
     {
         if (Opaque)
         {
-            arm.SetIndiatorMat(gameManager.GetMaterial("LightBlue"));
+            arm.setIndiatorMat(gameManager.GetMaterial("LightBlue"));
         }
         else
         {
-            arm.SetIndiatorMat(gameManager.GetMaterial("LightBlue_Transparent"));
+            arm.setIndiatorMat(gameManager.GetMaterial("LightBlue_Transparent"));
         }
     }
 

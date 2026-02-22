@@ -1,29 +1,87 @@
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
 public abstract class Enemy : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> armList;
+    protected GameObject player;
+    [SerializeField] private TextMeshProUGUI healthText;
+
+    [SerializeField] protected List<Arm_Base> armList;
     protected float health;
     protected float speed;
     protected bool isDead = false;
 
     protected NavMeshAgent agent;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] protected float attackCooldown;
+    [SerializeField] protected float attackCooldownTimer;
+    [SerializeField] protected float attackDistance;
+
     void Start()
     {
-        armList = new List<GameObject>();
+        health = Random.Range(60, 81);
+        speed = Random.Range(3, 6);
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = speed;
+        player = GameObject.FindGameObjectWithTag("Player");
 
-        foreach (GameObject armObj in armList)
+        armList = new List<Arm_Base>();
+
+        armList = GetComponentsInChildren<Arm_Base>().ToList<Arm_Base>();
+
+        deactivateArmPickup();
+    }
+
+    private void Update()
+    {
+        if (isDead) return;
+
+        healthText.text = "Health: " + health;
+        agent.SetDestination(player.transform.position);
+
+        if (attackCooldownTimer != 0.0f)
         {
-            if (armObj.TryGetComponent<Arm_Base>(out Arm_Base arm))
+            if (Vector3.Distance(transform.position, player.transform.position) < attackDistance)
             {
-                arm.DisableIndicator();
-                arm.isEnemyArm = true;
+                if (attackCooldown == 0.0f)
+                {
+                    attackPlayer();
+                    attackCooldown = attackCooldownTimer;
+                }
+            }
+            if (attackCooldown > 0.0f)
+            {
+                attackCooldown -= Time.deltaTime;
+            }
+            else if (attackCooldown < 0.0f)
+            {
+                attackCooldown = 0.0f;
             }
         }
+
+        enemySpecificUpdate();
     }
+
+    protected /*override*/ void attackPlayer()
+    {
+        foreach (Arm_Base arm in armList)
+        {
+            arm.armMainAction();
+        }
+    }
+
+    protected abstract void enemySpecificUpdate();
     public abstract void takeDamage(float damage);
+
+    private void deactivateArmPickup()
+    {
+        foreach (Arm_Base arm in armList)
+        {
+            arm.disableIndicator();
+            arm.isEnemyArm = true;
+        }
+    }
 }

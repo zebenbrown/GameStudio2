@@ -303,8 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc8697bf1597b3645b8f0a0b8fefd71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArmSocketScript
-  otherArmSocket: {fileID: 5142773179032784731}
-  ArmsInRange: []
+  AttachedArm: {fileID: 0}
   swapArmAction: {fileID: 0}
   armAction: {fileID: 0}
 --- !u!1 &2479017305602448542
@@ -427,9 +426,9 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
+  m_Radius: 0.4
+  m_Height: 2.1
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2471309850958260778
 MonoBehaviour:
@@ -443,7 +442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: f17e46d96b442904c8e3dbd6796a9ca2, type: 3}
+  m_Actions: {fileID: 0}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -571,6 +570,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ComboEnemy
   healthText: {fileID: 7375652513603296425}
+  armList: []
+  attackCooldown: 0
+  attackCooldownTimer: 2
+  attackDistance: 20
 --- !u!195 &2768975545559618915
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -718,8 +721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc8697bf1597b3645b8f0a0b8fefd71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArmSocketScript
-  otherArmSocket: {fileID: 6392487709266995964}
-  ArmsInRange: []
+  AttachedArm: {fileID: 0}
   swapArmAction: {fileID: 0}
   armAction: {fileID: 0}
 --- !u!1 &6058594075578597749
@@ -917,7 +919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8746593926701421467, guid: 5c1f5b3bfd0980d45a45cd22f8ab4e5a, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
