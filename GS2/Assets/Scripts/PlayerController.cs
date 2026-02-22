@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private float health = 150;
 
     //to have the camera follow the player
-    [SerializeField] private Camera camera;
+    [SerializeField] private new Camera camera;
     
     [SerializeField] private TextMeshProUGUI healthText;
     
@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         movePlayer();
+
+        healthText.text = "Health: " + health;
     }
 
     /*private void movePlayer()

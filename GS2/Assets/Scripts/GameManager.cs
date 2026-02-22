@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    private PlayerController player;
+
     [SerializeField] private Material LightBlue_Transparent;
     [SerializeField] private Material LightBlue;
 
@@ -26,6 +28,8 @@ public class GameManager : MonoBehaviour
         AllArmsList = new List<Arm_Base>();
         ArmSockets = new List<ArmSocketScript>();
         instance = this;
+
+        player = FindAnyObjectByType<PlayerController>();
     }
 
     private void Update()
@@ -36,7 +40,7 @@ public class GameManager : MonoBehaviour
             timeRemaining -= Time.deltaTime;
             float minutes = Mathf.FloorToInt(timeRemaining / 60);
             float seconds = Mathf.FloorToInt(timeRemaining % 60);
-            timerText.text = "Time Left - " + minutes.ToString("0") + ":" + seconds.ToString("00");
+            timerText.text = "Time Left: " + minutes.ToString("0") + ":" + seconds.ToString("00");
             
         }
 
@@ -83,7 +87,7 @@ public class GameManager : MonoBehaviour
         {
             if(!arm.IsEquipped())
             {
-                arm.EnableIndicator();
+                arm.enableIndicator();
             }
         }
     }
@@ -92,11 +96,11 @@ public class GameManager : MonoBehaviour
     {
         foreach(Arm_Base arm in AllArmsList)
         {
-            arm.DisableIndicator();
+            arm.disableIndicator();
         }
     }
 
-    public void RegisterArm(Arm_Base arm)
+    public void registerArm(Arm_Base arm)
     {
         AllArmsList.Add(arm);
     }
@@ -110,4 +114,6 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(scene);
     }
+
+    public PlayerController getPlayer() { return player; }
 }

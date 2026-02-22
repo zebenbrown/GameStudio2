@@ -11,13 +11,12 @@ public class Fire : Arm_Base
     [SerializeField] private Transform BulletReleasePoint;
 
     [SerializeField] private List<AudioClip> shootSounds;
-    private AudioSource audioSource;
 
     const float forwardForceFloat = 25;
     Vector3 forwardForceVector;
 
 
-    protected override void ArmSpecificStart()
+    protected override void armSpecificStart()
     {
         startRotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
 
@@ -27,24 +26,31 @@ public class Fire : Arm_Base
         audioSource = GetComponent<AudioSource>();
     }
 
-    public override void ArmMainAction()
+    public override void armMainAction()
     {
-        ShootGun();
+        shootGun();
+
+        playActivateSound();
     }
 
-    protected override void SpecificEquip()
+    protected override void specificEquip()
     {
         transform.localPosition = Vector3.zero;
     }
 
-    protected override void SpecificDrop()
+    protected override void specificDrop()
     {
         
     }
 
-    public void ShootGun()
+    public void shootGun()
     {
         GameObject bullet = Instantiate(BulletPrefab, BulletReleasePoint);
+
+        if (!isEnemyArm)
+        {
+            bullet.GetComponent<Bullet>().isPlayers = true;
+        }
 
         bullet.GetComponent<Rigidbody>().AddForce(BulletReleasePoint.forward * forwardForceFloat, ForceMode.Impulse);
         Collider bulletCollider = bullet.GetComponent<Collider>();
@@ -52,15 +58,19 @@ public class Fire : Arm_Base
         
         Physics.IgnoreCollision(bulletCollider, playerCollider);
         bullet.transform.SetParent(null);
-
-        audioSource.generator = GetRandomShootSound();
-        audioSource.Play();
     }
 
-    private AudioClip GetRandomShootSound()
+    private AudioClip getRandomShootSound()
     {
         AudioClip sound = shootSounds.ElementAt((int)Random.Range(0.0f, shootSounds.Count));
 
         return sound;
+    }
+
+    protected override void playActivateSound()
+    {
+        audioSource.clip = getRandomShootSound();
+        audioSource.volume = activationVolume;
+        audioSource.Play();
     }
 }
