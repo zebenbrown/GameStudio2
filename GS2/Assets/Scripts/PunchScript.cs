@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class PunchScript : Arm_Base
 {
     [SerializeField] private AnimationClip punchAnimationClip;
-
+    
     private string punchAnimationClipName;
     private Animator animator;
     private float animationTimer = 0;
@@ -17,6 +17,8 @@ public class PunchScript : Arm_Base
         animator = GetComponent<Animator>();
         punchAnimationClipName = punchAnimationClip.name;
         animator.enabled = false;
+
+        collider = GetComponentInChildren<Collider>();
     }
 
     protected override void specificEquip()
@@ -53,50 +55,11 @@ public class PunchScript : Arm_Base
         PunchForward();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        /*if (collision.gameObject.CompareTag("ComboEnemy"))
-        {
-            ComboEnemy.takeDamage(34);
-        }
-
-        if (collision.gameObject.CompareTag("RangedEnemy"))
-        {
-            RangedEnemy.takeDamage(34);
-        }
-
-        if (collision.gameObject.CompareTag("MeleeEnemy"))
-        {
-            MeleeEnemy.takeDamage(34);
-        }*/
-
-
-        /*if (collision.gameObject.CompareTag("MeleeEnemy"))
-        {
-            meleeEnemy.GetComponent<MeleeEnemy>();
-            meleeEnemy.takeDamage(34);
-            Destroy(gameObject);
-        }
-
-
-        if (collision.gameObject.CompareTag("RangedEnemy"))
-        {
-            rangedEnemy.GetComponent<RangedEnemy>();
-            rangedEnemy.takeDamage(34);
-            Destroy(gameObject);
-        }
-
-
-        if (collision.gameObject.CompareTag("ComboEnemy"))
-        {
-            comboEnemy.GetComponent<ComboEnemy>();
-            comboEnemy.takeDamage(34);
-            Destroy(gameObject);
-        }*/
-
         if (!isEnemyArm)
         {
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
             if (enemy != null)
             {
                 enemy.takeDamage(34);
@@ -104,14 +67,12 @@ public class PunchScript : Arm_Base
         }
         else
         {
-            /*
-            if (collision.gameObject == gameManager.getPlayer().gameObject)
+            
+            if (other.gameObject == gameManager.getPlayer().gameObject)
             {
 
-            }
-            */
-        }
-        
+            }   
+        }   
     }
 
     protected override void playActivateSound()

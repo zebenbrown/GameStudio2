@@ -60,27 +60,36 @@ public class PartDetection : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Arm_Base target))
+        Arm_Base arm = other.GetComponentInParent<Arm_Base>();
+        if (arm != null)
         {
-            if (!target.isEnemyArm)
+            if (!arm.isEnemyArm)
             {
-                addArm(target);
-                //Debug.Log("(Detector) Added Arm: " + target.name + "\nArms in range: " + ArmsInRange.Count);
+                addArm(arm);
+                //Debug.Log("(Detector) Added Arm: " + arm.name + "\nArms in range: " + ArmsInRange.Count);
 
-                SetIndicatorMaterial(true, target);
+                SetIndicatorMaterial(true, arm);
+            }
+        }
+        else
+        {
+            if (TryGetComponent<Arm_Base>(out Arm_Base gunArm))
+            {
+
             }
         }
     }
     void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out Arm_Base target))
+        Arm_Base arm = other.GetComponentInParent<Arm_Base>();
+        if (arm != null)
         {
-            if (!target.isEnemyArm)
+            if (!arm.isEnemyArm)
             {
-                removeArm(target);
+                removeArm(arm);
                 //Debug.Log("(Detector) Removed Arm: " + target.name + "\nArms in range: " + ArmsInRange.Count);
 
-                SetIndicatorMaterial(false, target);
+                SetIndicatorMaterial(false, arm);
             }
         }
     }

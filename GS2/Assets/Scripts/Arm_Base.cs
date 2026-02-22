@@ -29,7 +29,7 @@ public abstract class Arm_Base : MonoBehaviour
         {
             Debug.LogWarning("RigidBody Not Found!!!");
         }
-        collider = GetComponent<Collider>(); 
+        collider = GetComponentInChildren<Collider>(); 
         if (collider == null)
         {
             Debug.LogWarning("Collider Not Found!!!");

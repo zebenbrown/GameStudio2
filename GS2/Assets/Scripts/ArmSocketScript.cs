@@ -70,7 +70,7 @@ public class ArmSocketScript : MonoBehaviour
         AttachedArm = null;
         isEquipped = false;
 
-        gameManager.EnableUnequippedIndicators();
+        //gameManager.EnableUnequippedIndicators();
     }
 
     public bool IsEquipped() { return isEquipped; }
