@@ -569,6 +569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ab1c534ec072e40a8599c95f45c96b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ComboEnemy
+  armList: []
   healthText: {fileID: 7375652513603296425}
   armList: []
   attackCooldown: 0
@@ -912,6 +913,10 @@ PrefabInstance:
     - target: {fileID: 2799592612982084766, guid: 5c1f5b3bfd0980d45a45cd22f8ab4e5a, type: 3}
       propertyPath: m_Name
       value: Punch_Fist
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799592612982084766, guid: 5c1f5b3bfd0980d45a45cd22f8ab4e5a, type: 3}
+      propertyPath: m_TagString
+      value: EnemyArm
       objectReference: {fileID: 0}
     - target: {fileID: 8041288392989807881, guid: 5c1f5b3bfd0980d45a45cd22f8ab4e5a, type: 3}
       propertyPath: m_UseGravity

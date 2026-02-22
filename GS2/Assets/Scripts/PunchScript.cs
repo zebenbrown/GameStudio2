@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class PunchScript : Arm_Base
 {
     [SerializeField] private AnimationClip punchAnimationClip;
-
+    
     private string punchAnimationClipName;
     private Animator animator;
     private float animationTimer = 0;
@@ -53,41 +53,41 @@ public class PunchScript : Arm_Base
         PunchForward();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
-        /*if (collision.gameObject.CompareTag("ComboEnemy"))
+        Debug.Log("Collision with: " + collision.gameObject.name);
+        
+        if (GetComponentInParent<PlayerController>() == null)
         {
-            ComboEnemy.takeDamage(34);
+            return;
         }
 
-        if (collision.gameObject.CompareTag("RangedEnemy"))
+        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+        if (enemy != null)
         {
-            RangedEnemy.takeDamage(34);
+            enemy.takeDamage(34);
         }
 
-        if (collision.gameObject.CompareTag("MeleeEnemy"))
+        /*if (transform.parent.parent.CompareTag("Player"))
         {
-            MeleeEnemy.takeDamage(34);
-        }*/
-
-
-        /*if (collision.gameObject.CompareTag("MeleeEnemy"))
-        {
-            meleeEnemy.GetComponent<MeleeEnemy>();
-            meleeEnemy.takeDamage(34);
-            Destroy(gameObject);
+            if (collision.gameObject.CompareTag("MeleeEnemy") || collision.gameObject.CompareTag("RangedEnemy") ||
+                collision.gameObject.CompareTag("ComboEnemy"))
+            {
+                Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+                if (enemy != null)
+                    enemy.takeDamage(34);
+            }
         }
 
-
-        if (collision.gameObject.CompareTag("RangedEnemy"))
+        else
         {
-            rangedEnemy.GetComponent<RangedEnemy>();
-            rangedEnemy.takeDamage(34);
-            Destroy(gameObject);
-        }
+            return;
+        }#1#
+    }*/
 
-
-        if (collision.gameObject.CompareTag("ComboEnemy"))
+    private void OnTriggerEnter(Collider other)
+    {
+        if (CompareTag("EnemyArm"))
         {
             comboEnemy.GetComponent<ComboEnemy>();
             comboEnemy.takeDamage(34);
