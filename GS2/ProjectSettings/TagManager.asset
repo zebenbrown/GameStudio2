@@ -8,6 +8,8 @@ TagManager:
   - ComboEnemy
   - RangedEnemy
   - MeleeEnemy
+  - EnemyArm
+  - CameraTarget
   layers:
   - Default
   - TransparentFX
