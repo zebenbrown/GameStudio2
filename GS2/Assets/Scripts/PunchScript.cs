@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 
 public class PunchScript : Arm_Base
@@ -9,23 +10,21 @@ public class PunchScript : Arm_Base
     private Animator animator;
     private float animationTimer = 0;
 
-    private AudioSource audioSource;
+    [SerializeField] private AudioClip punchAudio;
 
-    protected override void ArmSpecificStart()
+    protected override void armSpecificStart()
     {
         animator = GetComponent<Animator>();
         punchAnimationClipName = punchAnimationClip.name;
         animator.enabled = false;
-
-        audioSource = GetComponent<AudioSource>();
     }
 
-    protected override void SpecificEquip()
+    protected override void specificEquip()
     {
         animator.enabled = true;
     }
 
-    protected override void SpecificDrop()
+    protected override void specificDrop()
     {
         animator.enabled = false;
     }
@@ -46,14 +45,10 @@ public class PunchScript : Arm_Base
     {
         animator.Play(punchAnimationClipName);
 
-        if (!audioSource.isPlaying && animationTimer == 0)
-        {
-            audioSource.Play();
-            animationTimer = punchAnimationClip.length;
-        }
+        playActivateSound();
     }
 
-    public override void ArmMainAction()
+    public override void armMainAction()
     {
         PunchForward();
     }
@@ -99,12 +94,32 @@ public class PunchScript : Arm_Base
             Destroy(gameObject);
         }*/
 
-        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-        if (enemy != null)
+        if (!isEnemyArm)
         {
-            enemy.takeDamage(34);
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.takeDamage(34);
+            }
+        }
+        else
+        {
+            /*
+            if (collision.gameObject == gameManager.getPlayer().gameObject)
+            {
+
+            }
+            */
         }
         
     }
-    
+
+    protected override void playActivateSound()
+    {
+        if (animationTimer == 0)
+        {
+            audioSource.Play();
+            animationTimer = punchAnimationClip.length;
+        }
+    }
 }

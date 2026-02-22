@@ -125,8 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc8697bf1597b3645b8f0a0b8fefd71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArmSocketScript
-  otherArmSocket: {fileID: 5142773179032784731}
-  ArmsInRange: []
+  AttachedArm: {fileID: 0}
   swapArmAction: {fileID: 0}
   armAction: {fileID: 0}
 --- !u!1 &2479017305602448542
@@ -248,9 +247,9 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
+  m_Radius: 0.4
+  m_Height: 2.1
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2471309850958260778
 MonoBehaviour:
@@ -392,6 +391,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RangedEnemy
   healthText: {fileID: 2369781514764301150}
+  armList: []
+  attackCooldown: 0
+  attackCooldownTimer: 2
+  attackDistance: 30
 --- !u!195 &8197557947206402874
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -717,8 +720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc8697bf1597b3645b8f0a0b8fefd71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArmSocketScript
-  otherArmSocket: {fileID: 6392487709266995964}
-  ArmsInRange: []
+  AttachedArm: {fileID: 0}
   swapArmAction: {fileID: 0}
   armAction: {fileID: 0}
 --- !u!1 &7875451231205451597
