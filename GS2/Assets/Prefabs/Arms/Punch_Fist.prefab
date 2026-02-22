@@ -112,7 +112,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -163,7 +163,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
@@ -180,10 +180,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PunchScript
   rangeIndicator: {fileID: 6871946558074917731}
+  isEnemyArm: 0
   punchAnimationClip: {fileID: 7400000, guid: 503a518bd208bf444b4cfd13b2866411, type: 2}
-  meleeEnemy: {fileID: 6778441839684319424, guid: 9c6ba952676f0674b90b11ddf38cdcd1, type: 3}
-  rangedEnemy: {fileID: 8429202588882496514, guid: 7f11fb568d0a4294792b327204dd5872, type: 3}
-  comboEnemy: {fileID: 1619109342636598004, guid: bfb6a3863c769c44fb55881ae11141ec, type: 3}
 --- !u!82 &1085840913156638830
 AudioSource:
   m_ObjectHideFlags: 0

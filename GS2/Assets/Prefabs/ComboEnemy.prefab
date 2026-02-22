@@ -303,8 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc8697bf1597b3645b8f0a0b8fefd71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArmSocketScript
-  otherArmSocket: {fileID: 5142773179032784731}
-  ArmsInRange: []
+  AttachedArm: {fileID: 0}
   swapArmAction: {fileID: 0}
   armAction: {fileID: 0}
 --- !u!1 &2479017305602448542
@@ -570,6 +569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ab1c534ec072e40a8599c95f45c96b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ComboEnemy
+  armList: []
   healthText: {fileID: 7375652513603296425}
 --- !u!195 &2768975545559618915
 NavMeshAgent:
@@ -718,8 +718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc8697bf1597b3645b8f0a0b8fefd71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArmSocketScript
-  otherArmSocket: {fileID: 6392487709266995964}
-  ArmsInRange: []
+  AttachedArm: {fileID: 0}
   swapArmAction: {fileID: 0}
   armAction: {fileID: 0}
 --- !u!1 &6058594075578597749
@@ -910,6 +909,10 @@ PrefabInstance:
     - target: {fileID: 2799592612982084766, guid: 5c1f5b3bfd0980d45a45cd22f8ab4e5a, type: 3}
       propertyPath: m_Name
       value: Punch_Fist
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799592612982084766, guid: 5c1f5b3bfd0980d45a45cd22f8ab4e5a, type: 3}
+      propertyPath: m_TagString
+      value: EnemyArm
       objectReference: {fileID: 0}
     - target: {fileID: 8041288392989807881, guid: 5c1f5b3bfd0980d45a45cd22f8ab4e5a, type: 3}
       propertyPath: m_UseGravity
