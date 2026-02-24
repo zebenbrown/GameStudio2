@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     //private PlayerControls controls;
-    private float health = 150;
+    public float health = 150;
 
     //to have the camera follow the player
     [SerializeField] private new Camera camera;
