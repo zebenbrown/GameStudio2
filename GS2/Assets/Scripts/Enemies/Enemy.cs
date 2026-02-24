@@ -62,6 +62,9 @@ public abstract class Enemy : MonoBehaviour
             }
         }
 
+        Debug.Log(gameObject.name + " Y Position: " + transform.position.y);
+
+
         enemySpecificUpdate();
     }
 

@@ -10,6 +10,7 @@ TagManager:
   - MeleeEnemy
   - EnemyArm
   - CameraTarget
+  - Floor
   layers:
   - Default
   - TransparentFX

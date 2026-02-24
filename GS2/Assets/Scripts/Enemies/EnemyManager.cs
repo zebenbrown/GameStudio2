@@ -12,8 +12,8 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager instance;
     
     //Spawn Bounds
-    float minX = -50, maxX = 50;
-    private float minZ = -50, maxZ = 50;
+    float minX = -33, maxX = 33;
+    private float minZ = -1.5f, maxZ = 42.5f;
 
     enum enemyType
     {
@@ -52,7 +52,8 @@ public class EnemyManager : MonoBehaviour
         {
             float randomX = Random.Range(minX, maxX);
             float randomZ = Random.Range(minZ, maxZ);
-            Vector3 randomSpawn = new Vector3(randomX, 1, randomZ);
+
+            Vector3 randomSpawn = RandomPointInQuad(spawnBoundries[0], spawnBoundries[1], spawnBoundries[2], spawnBoundries[3]);
             if (type == enemyType.Combo)
             {
                 enemies.Add(Instantiate(enemyPrefabList[(int)enemyType.Combo], randomSpawn, Quaternion.identity));
@@ -71,6 +72,28 @@ public class EnemyManager : MonoBehaviour
                 enemyCount++;
             }
         }
+    }
+
+    Vector3 RandomPointInQuad(Vector3 a, Vector3 b, Vector3 c, Vector3 d)
+    {
+        // Choose which triangle to choose from
+        if (Random.value < 0.5f)
+            return RandomPointInTriangle(a, b, c);
+        else
+            return RandomPointInTriangle(a, c, d);
+    }
+    Vector3 RandomPointInTriangle(Vector3 a, Vector3 b, Vector3 c)
+    {
+        float r1 = Random.value;
+        float r2 = Random.value;
+
+        if (r1 + r2 > 1f)
+        {
+            r1 = 1f - r1;
+            r2 = 1f - r2;
+        }
+
+        return a + r1 * (b - a) + r2 * (c - a);
     }
 
     IEnumerator Co_Delay(float seconds)

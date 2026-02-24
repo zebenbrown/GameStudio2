@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float deceleration = 25f;
     private Vector3 currentVelocity = Vector3.zero;
 
+    private Vector3 cameraOffset;
+
     private void Awake()
     {
 
@@ -42,6 +44,11 @@ public class PlayerController : MonoBehaviour
         var pause = GetComponent<PlayerInput>()
             .actions.FindAction("Pause");
 
+    }
+
+    private void Start()
+    {
+        cameraOffset = transform.position - camera.transform.position;
     }
 
     private void Update()
@@ -84,6 +91,8 @@ public class PlayerController : MonoBehaviour
 
         if (movement.sqrMagnitude > 0.001f)
         {
+            //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
             inputDirection.Normalize();
 
             //Accelerate to target speed
@@ -96,6 +105,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             //Decelerate to stop
             currentVelocity = Vector3.MoveTowards(currentVelocity, Vector3.zero, deceleration * Time.deltaTime);
         }
@@ -105,6 +115,7 @@ public class PlayerController : MonoBehaviour
 
         if ((movement.x != 0) || (movement.z != 0))
         {
+
             if (!isPlaying)
             {
                 PlayWalkingSound();
@@ -120,7 +131,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        camera.transform.position += currentVelocity * Time.deltaTime;
+        camera.transform.position = Vector3.Lerp(camera.transform.position, transform.position - cameraOffset, 0.5f);
+        //camera.transform.position = transform.position - cameraOffset;
+        //camera.transform.position += currentVelocity * Time.deltaTime;
 
         /*if ((movement.x != 0) || (movement.y != 0))
         {

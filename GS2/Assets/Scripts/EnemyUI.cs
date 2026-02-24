@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyUI : MonoBehaviour
 {
     GameObject cameraTarget = null;
-    Camera camera = null;
+    new Camera camera = null;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
