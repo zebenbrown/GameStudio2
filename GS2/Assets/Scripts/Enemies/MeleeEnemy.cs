@@ -16,7 +16,7 @@ public class MeleeEnemy : Enemy
         if (isDead) return;
         
         health -= damage;
-        Debug.Log("Melee Enemy: " + health);
+        //Debug.Log("Melee Enemy: " + health);
 
         if (health <= 0)
             die();

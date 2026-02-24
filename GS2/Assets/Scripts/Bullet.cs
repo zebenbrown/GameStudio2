@@ -69,8 +69,6 @@ public class Bullet : MonoBehaviour
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             animator.Play(destroyClip.name);
             enemy.takeDamage(BULLET_DAMAGE);
-
-            Destroy(gameObject, 0.4f);
         }
         if (collision.gameObject.TryGetComponent<PlayerController>(out PlayerController player))
         {
@@ -80,12 +78,20 @@ public class Bullet : MonoBehaviour
                 GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                 animator.Play(destroyClip.name);
                 player.takeDamage(BULLET_DAMAGE);
-
-                Destroy(gameObject, 0.4f);
             }
         }
 
-        
+        if (!collision.gameObject.CompareTag("Floor"))
+        {
+            if (isPlayers && (collision.gameObject.GetComponentInParent<PlayerController>() == null))
+            {
+                Destroy(gameObject);
+            }
+            else if (!isPlayers && (collision.gameObject.GetComponentInParent<Enemy>() == null))
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
     private void updateTransparency()

@@ -91,8 +91,8 @@ public class PlayerController : MonoBehaviour
 
         if (movement.sqrMagnitude > 0.001f)
         {
-            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
             inputDirection.Normalize();
 
             //Accelerate to target speed
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             //Decelerate to stop
             currentVelocity = Vector3.MoveTowards(currentVelocity, Vector3.zero, deceleration * Time.deltaTime);
         }
