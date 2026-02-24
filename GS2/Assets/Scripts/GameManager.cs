@@ -9,6 +9,7 @@ using UnityEditor.Searcher;
 public class GameManager : MonoBehaviour
 {
     private PlayerController player;
+    private SceneManagement sceneManager;
 
     [SerializeField] private Material LightBlue_Transparent;
     [SerializeField] private Material LightBlue;
@@ -34,6 +35,8 @@ public class GameManager : MonoBehaviour
         instance = this;
 
         player = FindAnyObjectByType<PlayerController>();
+        
+        sceneManager = GetComponent<SceneManagement>();
     }
 
     private void Start()
@@ -64,6 +67,10 @@ public class GameManager : MonoBehaviour
             levelGoal.SetActive(true);
             killsText.color = Color.green;
             goalReached = true;
+        }
+        if (player.getPlayerHealth() <= 0)
+        {
+            sceneManager.loadScene(SceneManagement.SceneNames.GameOver);
         }
     }
 

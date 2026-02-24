@@ -173,4 +173,6 @@ public class PlayerController : MonoBehaviour
     {
         health -= damage;
     }
+
+    public float getPlayerHealth() { return health; }
 }
