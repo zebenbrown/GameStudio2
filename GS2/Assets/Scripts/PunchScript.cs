@@ -10,7 +10,8 @@ public class PunchScript : Arm_Base
     private Animator animator;
     private float animationTimer = 0;
 
-    [SerializeField] private AudioClip punchAudio;
+    [SerializeField] private AudioSource punchSource;
+    [SerializeField] private AudioSource hitSource;
 
     protected override void armSpecificStart()
     {
@@ -63,6 +64,7 @@ public class PunchScript : Arm_Base
             if (enemy != null)
             {
                 enemy.takeDamage(34);
+                hitSource.Play();
             }
         }
         else
@@ -79,7 +81,7 @@ public class PunchScript : Arm_Base
     {
         if (animationTimer == 0)
         {
-            audioSource.Play();
+            punchSource.Play();
             animationTimer = punchAnimationClip.length;
         }
     }
