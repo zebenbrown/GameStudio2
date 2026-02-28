@@ -8,6 +8,9 @@ TagManager:
   - ComboEnemy
   - RangedEnemy
   - MeleeEnemy
+  - EnemyArm
+  - CameraTarget
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -18,8 +21,8 @@ TagManager:
   - Attachments
   - Bullets
   - Player
-  - 
-  - 
+  - Enemy
+  - PlayerHitBox
   - 
   - 
   - 

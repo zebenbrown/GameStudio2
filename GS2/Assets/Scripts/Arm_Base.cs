@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,45 +15,50 @@ public abstract class Arm_Base : MonoBehaviour
     protected bool isEquipped = false;
     public bool isEnemyArm = false;
 
+    protected AudioSource audioSource;
+    protected float activationVolume = 0.6f;
+
     private void Start()
     {
         gameManager = FindAnyObjectByType<GameManager>();
-        gameManager.RegisterArm(this);
+        gameManager.registerArm(this);
 
         rb = GetComponent<Rigidbody>();
         if (rb == null)
         {
             Debug.LogWarning("RigidBody Not Found!!!");
         }
-        collider = GetComponent<Collider>(); 
+        collider = GetComponentInChildren<Collider>(); 
         if (collider == null)
         {
             Debug.LogWarning("Collider Not Found!!!");
         }
         startRotation = transform.rotation;
 
-        ArmSpecificStart();
+        audioSource = GetComponent<AudioSource>();
+
+        armSpecificStart();
     }
 
-    public void SetIndiatorMat(Material mat)
+    public void setIndiatorMat(Material mat)
     {
         rangeIndicator.GetComponent<MeshRenderer>().material = mat;
     }
 
-    public virtual void EquipArm(Transform armSocket)
+    public virtual void equipArm(Transform armSocket)
     {
         transform.parent = armSocket;
         attachedArmSocket = armSocket.GetComponent<ArmSocketScript>();
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
-        //ResetTransform();
+        //resetTransform();
         rb.constraints = RigidbodyConstraints.FreezeAll;
         rb.useGravity = false;
         collider.enabled = false;
 
         isEquipped = true;
 
-        DisableIndicator();
+        disableIndicator();
 
         if (attachedArmSocket.gameObject.name == "Arm_Socket_R")
         {
@@ -65,17 +69,13 @@ public abstract class Arm_Base : MonoBehaviour
             transform.localRotation = Quaternion.identity;
         }
 
-        SpecificEquip();
+        specificEquip();
     }
 
-    protected abstract void SpecificEquip();
+    protected abstract void specificEquip();
 
-    public void DisableIndicator()
-    {
-        rangeIndicator.gameObject.SetActive(false);
-    }
 
-    public virtual void DropArm()
+    public virtual void dropArm()
     {
         transform.parent = null;
         attachedArmSocket = null;
@@ -85,28 +85,34 @@ public abstract class Arm_Base : MonoBehaviour
 
         isEquipped = false;
 
-        EnableIndicator();
+        enableIndicator();
 
-        SpecificDrop();
+        specificDrop();
     }
 
-    protected abstract void SpecificDrop();
+    protected abstract void specificDrop();
 
-    public void EnableIndicator()
+    public void disableIndicator()
+    {
+        rangeIndicator.gameObject.SetActive(false);
+    }
+    public void enableIndicator()
     {
         rangeIndicator.gameObject.SetActive(true);
     }
 
 
-    protected void ResetTransform()
+    protected void resetTransform()
     {
         //transform.SetLocalPositionAndRotation(Vector3.zero, startRotation);
         transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
 
+    protected abstract void playActivateSound();
+
     public bool IsEquipped() { return isEquipped; }
 
-    protected abstract void ArmSpecificStart();
+    protected abstract void armSpecificStart();
 
-    public abstract void ArmMainAction();
+    public abstract void armMainAction();
 }

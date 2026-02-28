@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2133944469090655086}
   - component: {fileID: 770784837001384897}
   - component: {fileID: 4614653385368103945}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Range_Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 2817887416927910290}
   - component: {fileID: 4483185205544541196}
   - component: {fileID: 2255402658399362185}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Arm_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -6,10 +6,10 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     //private PlayerControls controls;
-    private float health = 150;
+    public float health = 150;
 
     //to have the camera follow the player
-    [SerializeField] private Camera camera;
+    [SerializeField] private new Camera camera;
     
     [SerializeField] private TextMeshProUGUI healthText;
     
@@ -22,9 +22,12 @@ public class PlayerController : MonoBehaviour
     private bool isPlaying;
 
     [SerializeField] private float maxSpeed = 6f;
+    [SerializeField] private float rotationSpeed = 10f;
     [SerializeField] private float acceleration = 20f;
     [SerializeField] private float deceleration = 25f;
     private Vector3 currentVelocity = Vector3.zero;
+
+    private Vector3 cameraOffset;
 
     private void Awake()
     {
@@ -44,56 +47,39 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        cameraOffset = transform.position - camera.transform.position;
+    }
+
     private void Update()
     {
         movePlayer();
+        rotatePlayer();
+
+        healthText.text = "Health: " + health;
     }
-
-    /*private void movePlayer()
-    {
-        Vector2 inputVector = moveAction.ReadValue<Vector2>();
-        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
-
-        if (moveDir.sqrMagnitude > 0.001f)
-        {
-            // Move
-            transform.position += moveDir * speed * Time.deltaTime;
-
-            // Rotate to face movement direction
-            Quaternion targetRotation = Quaternion.LookRotation(moveDir, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15f * Time.deltaTime);
-        }
-    }*/
-
     
     private void movePlayer()
     {
-        /*Vector2 movementValues = moveAction.ReadValue<Vector2>();
-        Vector3 movement = new Vector3(movementValues.x, 0f, movementValues.y);
-        transform.position += new Vector3(movement.x, 0, movement.z) * speed * Time.deltaTime;
-        /*Quaternion rotation = Quaternion.LookRotation(movement, Vector3.up);
-        Debug.Log(rotation);
-        transform.rotation = rotation;#1#
-        //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.5f);*/
         
         Vector2 movementValues = moveAction.ReadValue<Vector2>();
         Vector3 movement = new Vector3(movementValues.x, 0f, movementValues.y);
         Vector3 inputDirection = new Vector3(movementValues.x, 0f, movementValues.y);
-
+        
         if (movement.sqrMagnitude > 0.001f)
         {
+            //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
             inputDirection.Normalize();
 
             //Accelerate to target speed
             Vector3 targetVelocity = inputDirection * maxSpeed;
             currentVelocity = Vector3.MoveTowards(currentVelocity, targetVelocity, acceleration * Time.deltaTime);
-
-            // Rotate to face movement direction
-            Quaternion targetRotation = Quaternion.LookRotation(movement, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15f * Time.deltaTime);
         }
         else
         {
+            //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             //Decelerate to stop
             currentVelocity = Vector3.MoveTowards(currentVelocity, Vector3.zero, deceleration * Time.deltaTime);
         }
@@ -103,6 +89,7 @@ public class PlayerController : MonoBehaviour
 
         if ((movement.x != 0) || (movement.z != 0))
         {
+
             if (!isPlaying)
             {
                 PlayWalkingSound();
@@ -118,24 +105,29 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        camera.transform.position = transform.position - cameraOffset;
         camera.transform.position += currentVelocity * Time.deltaTime;
+    }
 
-        /*if ((movement.x != 0) || (movement.y != 0))
+    private void rotatePlayer()
+    {
+        Vector2 mousePosition = Mouse.current.position.ReadValue();
+        
+        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+        
+        Plane plane = new Plane(Vector3.up, transform.position);
+
+        if (plane.Raycast(ray, out float distance))
         {
-            if (!isMoving)
-            {
-                audioSource.Play();
-                isMoving = true;
-            }
+            Vector3 hitPoint = ray.GetPoint(distance);
+            
+            Vector3 hitDirection = hitPoint - transform.position;
+            hitDirection.y = 0.0f;
+            
+            Quaternion targetRotation = Quaternion.LookRotation(hitDirection);
+            
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
-        else
-        {
-            if (isMoving)
-            {
-                audioSource.Stop();
-                isMoving = false;
-            }
-        }*/
     }
 
     private void PlayWalkingSound()
@@ -158,4 +150,6 @@ public class PlayerController : MonoBehaviour
     {
         health -= damage;
     }
+
+    public float getPlayerHealth() { return health; }
 }

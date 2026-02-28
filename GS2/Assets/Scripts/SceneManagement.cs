@@ -21,8 +21,34 @@ public class SceneManagement : MonoBehaviour
         SceneManager.LoadScene(scene);
     }
 
+    public void loadScene(SceneNames scene)
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(scene.ToString());
+    }
+    public void loadScene(SceneNames scene, int enemiesKilled)
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(scene.ToString());
+    }
+
+    public void reloadCurrentScene()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     public void quit()
     {
         Application.Quit();
     }
+    public enum SceneNames
+    {
+        Main,
+        Level1,
+        GameOver,
+        LevelComplete,
+        MainMenu,
+    }
 }
+
