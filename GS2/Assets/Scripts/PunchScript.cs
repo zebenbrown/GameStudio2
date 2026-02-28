@@ -8,6 +8,8 @@ public class PunchScript : Arm_Base
 {
     [SerializeField] private AnimationClip punchAnimationClip;
 
+    [SerializeField] private float PUNCH_DAMAGE = 34;
+
     private string punchAnimationClipName;
     private Animator animator;
     private float animationTimer = 0;
@@ -92,7 +94,7 @@ public class PunchScript : Arm_Base
                     Enemy enemy = other.gameObject.GetComponent<Enemy>();
                     if (enemy != null)
                     {
-                        enemy.takeDamage(34);
+                        enemy.takeDamage(PUNCH_DAMAGE);
                         damageDealt = true;
                     }
                     
@@ -115,7 +117,7 @@ public class PunchScript : Arm_Base
                 {
                     if (other.TryGetComponent<PlayerController>(out PlayerController player))
                     {
-                        player.takeDamage(34);
+                        player.takeDamage(PUNCH_DAMAGE);
                         damageDealt = true;
                     }
                 }
@@ -123,7 +125,7 @@ public class PunchScript : Arm_Base
                 {
                     if (punchStarted && !damageDealt)
                     {
-                        player.takeDamage(34);
+                        player.takeDamage(PUNCH_DAMAGE);
                         damageDealt = true;
                     }
                 }
@@ -158,7 +160,7 @@ public class PunchScript : Arm_Base
                     Enemy enemy = entry.Key.gameObject.GetComponent<Enemy>();
                     if (enemy != null)
                     {
-                        enemy.takeDamage(34);
+                        enemy.takeDamage(PUNCH_DAMAGE);
                         if (enemiesHit.ContainsKey(enemy.gameObject))
                         {
                             enemiesHit.Remove(entry.Key);

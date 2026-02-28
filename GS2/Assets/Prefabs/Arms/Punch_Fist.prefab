@@ -160,6 +160,7 @@ MonoBehaviour:
   rangeIndicator: {fileID: 6871946558074917731}
   isEnemyArm: 0
   punchAnimationClip: {fileID: 7400000, guid: 503a518bd208bf444b4cfd13b2866411, type: 2}
+  PUNCH_DAMAGE: 25
   punchAudio: {fileID: 0}
 --- !u!82 &1085840913156638830
 AudioSource:
