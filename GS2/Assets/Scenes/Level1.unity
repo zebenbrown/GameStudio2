@@ -13374,8 +13374,6 @@ MonoBehaviour:
   - {x: 32, y: 0.4, z: 9.5}
   - {x: 0, y: 0.4, z: -2}
   enemyPrefabList:
-  - {fileID: 2479017305602448542, guid: bfb6a3863c769c44fb55881ae11141ec, type: 3}
-  - {fileID: 2479017305602448542, guid: 7f11fb568d0a4294792b327204dd5872, type: 3}
   - {fileID: 2479017305602448542, guid: 9c6ba952676f0674b90b11ddf38cdcd1, type: 3}
 --- !u!4 &1246682254
 Transform:

@@ -17,9 +17,9 @@ public class EnemyManager : MonoBehaviour
 
     enum enemyType
     {
+        Melee,
         Combo,
-        Ranged,
-        Melee
+        Ranged
     }
 
     private void Awake()
@@ -30,8 +30,8 @@ public class EnemyManager : MonoBehaviour
         // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-       spawnEnemy(enemyType.Combo);
-       spawnEnemy(enemyType.Ranged);
+       //spawnEnemy(enemyType.Combo);
+       //spawnEnemy(enemyType.Ranged);
        spawnEnemy(enemyType.Melee);
     }
 
@@ -41,7 +41,7 @@ public class EnemyManager : MonoBehaviour
         if (enemyCount < 3)
         {
             //StartCoroutine(Co_Delay(3));
-            int type = Random.Range(0, 3);
+            int type = Random.Range(0, enemyPrefabList.Count);
             spawnEnemy((enemyType)type);
         }
     }
