@@ -1,8 +1,5 @@
 using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.InputSystem;
 
 public class PunchScript : Arm_Base
 {
