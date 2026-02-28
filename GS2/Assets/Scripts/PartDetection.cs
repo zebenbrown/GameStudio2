@@ -65,17 +65,12 @@ public class PartDetection : MonoBehaviour
         {
             if (!arm.isEnemyArm)
             {
-                addArm(arm);
-                //Debug.Log("(Detector) Added Arm: " + arm.name + "\nArms in range: " + ArmsInRange.Count);
+                if (!ArmsInRange.Contains(arm))
+                {
+                    addArm(arm);
 
-                SetIndicatorMaterial(true, arm);
-            }
-        }
-        else
-        {
-            if (TryGetComponent<Arm_Base>(out Arm_Base gunArm))
-            {
-
+                    SetIndicatorMaterial(true, arm);
+                }
             }
         }
     }
@@ -86,10 +81,12 @@ public class PartDetection : MonoBehaviour
         {
             if (!arm.isEnemyArm)
             {
-                removeArm(arm);
-                //Debug.Log("(Detector) Removed Arm: " + target.name + "\nArms in range: " + ArmsInRange.Count);
+                if (ArmsInRange.Contains(arm))
+                {
+                    removeArm(arm);
 
-                SetIndicatorMaterial(false, arm);
+                    SetIndicatorMaterial(false, arm);
+                }
             }
         }
     }
@@ -97,13 +94,11 @@ public class PartDetection : MonoBehaviour
     public void addArm(Arm_Base arm)
     {
         ArmsInRange.Add(arm);
-        //Debug.Log("Arm Added: " + arm.name);
     }
 
     public void removeArm(Arm_Base arm)
     {
         ArmsInRange.Remove(arm);
-        //Debug.Log("Arm Removed: " + arm.name);
     }
 
     public void SetIndicatorMaterial(bool Opaque, Arm_Base arm)

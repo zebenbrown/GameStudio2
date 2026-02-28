@@ -1,8 +1,12 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneManagement : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI scoreText;
+    public static int enemiesKilled = 0;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -12,7 +16,10 @@ public class SceneManagement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (scoreText != null)
+        {
+            scoreText.text = "Enemies\nKilled: " + enemiesKilled;
+        }
     }
 
     public void loadScene(string scene)

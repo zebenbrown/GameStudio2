@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
@@ -6,6 +7,8 @@ using UnityEngine.InputSystem;
 public class PunchScript : Arm_Base
 {
     [SerializeField] private AnimationClip punchAnimationClip;
+
+    [SerializeField] private float PUNCH_DAMAGE = 34;
 
     private string punchAnimationClipName;
     private Animator animator;
@@ -21,6 +24,8 @@ public class PunchScript : Arm_Base
         animator = GetComponent<Animator>();
         punchAnimationClipName = punchAnimationClip.name;
         animator.enabled = false;
+
+        audioSource = GetComponent<AudioSource>();
 
         collider = GetComponentInChildren<Collider>();
     }
@@ -43,14 +48,23 @@ public class PunchScript : Arm_Base
         }
         else
         {
+            EndPunchAction();
             animationTimer = 0;
         }
+    }
+
+    private void EndPunchAction()
+    {
+        punchStarted = false;
+        animator.enabled = false;
+        damageDealt = false;
     }
 
     private void PunchForward()
     {
         if (!punchStarted)
         {
+            animator.enabled = true;
             animator.Play(punchAnimationClipName);
 
             playActivateSound();
@@ -66,6 +80,10 @@ public class PunchScript : Arm_Base
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Player Hit");
+        }
         //basically is it the player's arm
         if (!isEnemyArm)
         {
@@ -76,7 +94,7 @@ public class PunchScript : Arm_Base
                     Enemy enemy = other.gameObject.GetComponent<Enemy>();
                     if (enemy != null)
                     {
-                        enemy.takeDamage(34);
+                        enemy.takeDamage(PUNCH_DAMAGE);
                         damageDealt = true;
                     }
                     
@@ -92,8 +110,25 @@ public class PunchScript : Arm_Base
         }
         else
         {
-            if (other.gameObject == gameManager.getPlayer().gameObject)
+
+            if (other.gameObject.name != "PartDetector")
             {
+                if (other.transform.parent == null)
+                {
+                    if (other.TryGetComponent<PlayerController>(out PlayerController player))
+                    {
+                        player.takeDamage(PUNCH_DAMAGE);
+                        damageDealt = true;
+                    }
+                }
+                else if (other.transform.parent.TryGetComponent<PlayerController>(out PlayerController player))//.TryGetComponent<PlayerController>(out PlayerController player))
+                {
+                    if (punchStarted && !damageDealt)
+                    {
+                        player.takeDamage(PUNCH_DAMAGE);
+                        damageDealt = true;
+                    }
+                }
             }
         }
         //enemiesHit.Clear();
@@ -125,7 +160,7 @@ public class PunchScript : Arm_Base
                     Enemy enemy = entry.Key.gameObject.GetComponent<Enemy>();
                     if (enemy != null)
                     {
-                        enemy.takeDamage(34);
+                        enemy.takeDamage(PUNCH_DAMAGE);
                         if (enemiesHit.ContainsKey(enemy.gameObject))
                         {
                             enemiesHit.Remove(entry.Key);

@@ -39,7 +39,6 @@ public class Fire : Arm_Base
 
     protected override void specificDrop()
     {
-        
     }
 
     public void shootGun()
@@ -50,11 +49,15 @@ public class Fire : Arm_Base
         {
             bullet.GetComponent<Bullet>().isPlayers = true;
         }
+        else
+        {
+            bullet.GetComponent<Bullet>().enemySource = GetComponentInParent<Enemy>();
+        }
 
         bullet.GetComponent<Rigidbody>().AddForce(BulletReleasePoint.forward * forwardForceFloat, ForceMode.Impulse);
         Collider bulletCollider = bullet.GetComponent<Collider>();
         Collider playerCollider = bullet.GetComponentInParent<Collider>();
-        
+
         Physics.IgnoreCollision(bulletCollider, playerCollider);
         bullet.transform.SetParent(null);
     }

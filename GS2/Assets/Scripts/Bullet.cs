@@ -9,15 +9,13 @@ public class Bullet : MonoBehaviour
     private Color color;
 
     public bool isPlayers = false;
+    public Enemy enemySource;
 
     private Animator animator;
     [SerializeField] private AnimationClip destroyClip;
 
-    //[SerializeField] private MeleeEnemy meleeEnemy;
-    //[SerializeField] private RangedEnemy rangedEnemy;
-    //[SerializeField] private ComboEnemy comboEnemy;
-
     [SerializeField] private const float BULLET_DAMAGE = 20.0f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -65,19 +63,32 @@ public class Bullet : MonoBehaviour
 
         if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemy))
         {
-            //Debug.Log($"Hit: {collision.gameObject.name}, Layer: {LayerMask.LayerToName(collision.gameObject.layer)}");
-            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            animator.Play(destroyClip.name);
-            enemy.takeDamage(BULLET_DAMAGE);
+            if (enemy != enemySource)
+            {
+                enemy.takeDamage(BULLET_DAMAGE);
+                Destroy(gameObject);
+                return;
+            }
+        }
+        else if(collision.transform.parent != null)
+        {
+            if (collision.transform.parent.TryGetComponent<Enemy>(out Enemy enemyParent))
+            {
+                if (enemyParent != enemySource)
+                {
+                    enemyParent.takeDamage(BULLET_DAMAGE);
+                    Destroy(gameObject);
+                    return;
+                }
+            }
         }
         if (collision.gameObject.TryGetComponent<PlayerController>(out PlayerController player))
         {
-            //Debug.LogWarning($"Hit: {collision.gameObject.name}, Layer: {LayerMask.LayerToName(collision.gameObject.layer)}");
             if (!isPlayers)
             {
-                GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-                animator.Play(destroyClip.name);
                 player.takeDamage(BULLET_DAMAGE);
+                Destroy(gameObject);
+                return;
             }
         }
 
@@ -87,9 +98,12 @@ public class Bullet : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-            else if (!isPlayers && (collision.gameObject.GetComponentInParent<Enemy>() == null))
+            else if (!isPlayers)
             {
-                Destroy(gameObject);
+                if (collision.gameObject.GetComponentInParent<Enemy>() != enemySource)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }
