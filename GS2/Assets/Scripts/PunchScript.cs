@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
@@ -22,6 +23,8 @@ public class PunchScript : Arm_Base
         punchAnimationClipName = punchAnimationClip.name;
         animator.enabled = false;
 
+        audioSource = GetComponent<AudioSource>();
+
         collider = GetComponentInChildren<Collider>();
     }
 
@@ -43,14 +46,23 @@ public class PunchScript : Arm_Base
         }
         else
         {
+            EndPunchAction();
             animationTimer = 0;
         }
+    }
+
+    private void EndPunchAction()
+    {
+        punchStarted = false;
+        animator.enabled = false;
+        damageDealt = false;
     }
 
     private void PunchForward()
     {
         if (!punchStarted)
         {
+            animator.enabled = true;
             animator.Play(punchAnimationClipName);
 
             playActivateSound();
@@ -66,6 +78,10 @@ public class PunchScript : Arm_Base
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Player Hit");
+        }
         //basically is it the player's arm
         if (!isEnemyArm)
         {
@@ -92,8 +108,25 @@ public class PunchScript : Arm_Base
         }
         else
         {
-            if (other.gameObject == gameManager.getPlayer().gameObject)
+
+            if (other.gameObject.name != "PartDetector")
             {
+                if (other.transform.parent == null)
+                {
+                    if (other.TryGetComponent<PlayerController>(out PlayerController player))
+                    {
+                        player.takeDamage(34);
+                        damageDealt = true;
+                    }
+                }
+                else if (other.transform.parent.TryGetComponent<PlayerController>(out PlayerController player))//.TryGetComponent<PlayerController>(out PlayerController player))
+                {
+                    if (punchStarted && !damageDealt)
+                    {
+                        player.takeDamage(34);
+                        damageDealt = true;
+                    }
+                }
             }
         }
         //enemiesHit.Clear();
