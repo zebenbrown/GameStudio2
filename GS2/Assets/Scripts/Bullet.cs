@@ -9,15 +9,13 @@ public class Bullet : MonoBehaviour
     private Color color;
 
     public bool isPlayers = false;
+    public Enemy enemySource;
 
     private Animator animator;
     [SerializeField] private AnimationClip destroyClip;
 
-    //[SerializeField] private MeleeEnemy meleeEnemy;
-    //[SerializeField] private RangedEnemy rangedEnemy;
-    //[SerializeField] private ComboEnemy comboEnemy;
-
     [SerializeField] private const float BULLET_DAMAGE = 20.0f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -87,9 +85,12 @@ public class Bullet : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-            else if (!isPlayers && (collision.gameObject.GetComponentInParent<Enemy>() == null))
+            else if (!isPlayers)
             {
-                Destroy(gameObject);
+                if (collision.gameObject.GetComponentInParent<Enemy>() != enemySource)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }
