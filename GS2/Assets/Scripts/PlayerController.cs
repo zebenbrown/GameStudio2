@@ -50,12 +50,15 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         cameraOffset = transform.position - camera.transform.position;
+        PlaySwimSound();
     }
 
     private void Update()
     {
         movePlayer();
         rotatePlayer();
+
+        audioSource.volume = currentVelocity.magnitude / maxSpeed;
 
         healthText.text = "Health: " + health;
     }
@@ -86,25 +89,6 @@ public class PlayerController : MonoBehaviour
 
         transform.position += currentVelocity * Time.deltaTime;
 
-
-        if ((movement.x != 0) || (movement.z != 0))
-        {
-
-            if (!isPlaying)
-            {
-                PlayWalkingSound();
-                isPlaying = true;
-            }
-        }
-        else
-        {
-            if (isPlaying)
-            {
-                StopWalkingSound();
-                isPlaying = false;
-            }
-        }
-
         camera.transform.position = transform.position - cameraOffset;
         camera.transform.position += currentVelocity * Time.deltaTime;
     }
@@ -130,7 +114,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void PlayWalkingSound()
+    private void PlaySwimSound()
     {
         audioSource.Play();
     }
