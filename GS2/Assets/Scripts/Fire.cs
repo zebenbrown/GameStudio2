@@ -38,7 +38,6 @@ public class Fire : Arm_Base
 
     protected override void SpecificDrop()
     {
-        
     }
 
     public void ShootGun()
@@ -48,28 +47,12 @@ public class Fire : Arm_Base
         bullet.GetComponent<Rigidbody>().AddForce(BulletReleasePoint.forward * forwardForceFloat, ForceMode.Impulse);
         Collider bulletCollider = bullet.GetComponent<Collider>();
         Collider playerCollider = bullet.GetComponentInParent<Collider>();
-        
+
         Physics.IgnoreCollision(bulletCollider, playerCollider);
         bullet.transform.SetParent(null);
 
         audioSource.generator = GetRandomShootSound();
         audioSource.Play();
-    }
-
-    private void OnLook(InputValue value)
-    {
-        Vector2 mousePos;
-        mousePos = Camera.main.ScreenToWorldPoint(value.Get<Vector2>());
-        AimAt(mousePos);
-    }
-
-    protected void AimAt(Vector3 target)
-    {
-        //float lookAngle = target.y;
-        //transform.eulerAngles = new Vector3(0, lookAngle, 0);
-        //Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, target);
-        Quaternion targetRotation = Quaternion.Euler(0, target.y, 0);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15f * Time.deltaTime);
     }
 
     private AudioClip GetRandomShootSound()
