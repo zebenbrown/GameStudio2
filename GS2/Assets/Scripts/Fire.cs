@@ -1,7 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -46,6 +45,11 @@ public class Fire : Arm_Base
     public void shootGun()
     {
         GameObject bullet = Instantiate(BulletPrefab, BulletReleasePoint);
+
+        if (!isEnemyArm)
+        {
+            bullet.GetComponent<Bullet>().isPlayers = true;
+        }
 
         bullet.GetComponent<Rigidbody>().AddForce(BulletReleasePoint.forward * forwardForceFloat, ForceMode.Impulse);
         Collider bulletCollider = bullet.GetComponent<Collider>();

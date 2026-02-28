@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEditor.Searcher;
 
 public class GameManager : MonoBehaviour
 {
     private PlayerController player;
+    private SceneManagement sceneManager;
 
     [SerializeField] private Material LightBlue_Transparent;
     [SerializeField] private Material LightBlue;
@@ -20,6 +22,9 @@ public class GameManager : MonoBehaviour
    
     private float timeRemaining = 180f;
     public int enemiesKilled;
+    [SerializeField] private int ENEMY_KILL_GOAL = 10;
+    private bool goalReached = false;
+    [SerializeField] private GameObject levelGoal;
     
     public static GameManager instance;
 
@@ -30,6 +35,14 @@ public class GameManager : MonoBehaviour
         instance = this;
 
         player = FindAnyObjectByType<PlayerController>();
+        
+        sceneManager = GetComponent<SceneManagement>();
+    }
+
+    private void Start()
+    {
+        goalReached = false;
+        levelGoal.SetActive(false);
     }
 
     private void Update()
@@ -47,6 +60,17 @@ public class GameManager : MonoBehaviour
         if (timeRemaining <= 0)
         {
             SceneManager.LoadScene("GameOver");
+        }
+
+        if(enemiesKilled >= ENEMY_KILL_GOAL && goalReached == false)
+        {
+            levelGoal.SetActive(true);
+            killsText.color = Color.green;
+            goalReached = true;
+        }
+        if (player.getPlayerHealth() <= 0)
+        {
+            sceneManager.loadScene(SceneManagement.SceneNames.GameOver);
         }
     }
 
@@ -110,10 +134,6 @@ public class GameManager : MonoBehaviour
         ArmSockets.Add(socket);
     }
 
-    public void loadScene(string scene)
-    {
-        SceneManager.LoadScene(scene);
-    }
 
     public PlayerController getPlayer() { return player; }
 }

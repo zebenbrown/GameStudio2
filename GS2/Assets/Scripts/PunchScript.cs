@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
@@ -9,6 +10,9 @@ public class PunchScript : Arm_Base
     private string punchAnimationClipName;
     private Animator animator;
     private float animationTimer = 0;
+    private bool punchStarted = false;
+    private bool damageDealt = false;
+    private Dictionary<GameObject, bool> enemiesHit = new Dictionary<GameObject, bool>();
 
     [SerializeField] private AudioClip punchAudio;
 
@@ -17,6 +21,8 @@ public class PunchScript : Arm_Base
         animator = GetComponent<Animator>();
         punchAnimationClipName = punchAnimationClip.name;
         animator.enabled = false;
+
+        collider = GetComponentInChildren<Collider>();
     }
 
     protected override void specificEquip()
@@ -43,9 +49,14 @@ public class PunchScript : Arm_Base
 
     private void PunchForward()
     {
-        animator.Play(punchAnimationClipName);
+        if (!punchStarted)
+        {
+            animator.Play(punchAnimationClipName);
 
-        playActivateSound();
+            playActivateSound();
+
+            punchStarted = true;
+        }
     }
 
     public override void armMainAction()
@@ -53,65 +64,39 @@ public class PunchScript : Arm_Base
         PunchForward();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        /*if (collision.gameObject.CompareTag("ComboEnemy"))
-        {
-            ComboEnemy.takeDamage(34);
-        }
-
-        if (collision.gameObject.CompareTag("RangedEnemy"))
-        {
-            RangedEnemy.takeDamage(34);
-        }
-
-        if (collision.gameObject.CompareTag("MeleeEnemy"))
-        {
-            MeleeEnemy.takeDamage(34);
-        }*/
-
-
-        /*if (collision.gameObject.CompareTag("MeleeEnemy"))
-        {
-            meleeEnemy.GetComponent<MeleeEnemy>();
-            meleeEnemy.takeDamage(34);
-            Destroy(gameObject);
-        }
-
-
-        if (collision.gameObject.CompareTag("RangedEnemy"))
-        {
-            rangedEnemy.GetComponent<RangedEnemy>();
-            rangedEnemy.takeDamage(34);
-            Destroy(gameObject);
-        }
-
-
-        if (collision.gameObject.CompareTag("ComboEnemy"))
-        {
-            comboEnemy.GetComponent<ComboEnemy>();
-            comboEnemy.takeDamage(34);
-            Destroy(gameObject);
-        }*/
-
+        //basically is it the player's arm
         if (!isEnemyArm)
         {
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            if (enemy != null)
+            if (punchStarted)
             {
-                enemy.takeDamage(34);
+                if (!damageDealt)
+                {
+                    Enemy enemy = other.gameObject.GetComponent<Enemy>();
+                    if (enemy != null)
+                    {
+                        enemy.takeDamage(34);
+                        damageDealt = true;
+                    }
+                    
+                    /*if (other.gameObject.GetComponent<Enemy>())
+                    {
+                        //Dictionary<enemy GameObject, enemy already took damage?>
+                        //enemiesHit.Add(other.gameObject, false);
+
+
+                    }*/
+                }
             }
         }
         else
         {
-            /*
-            if (collision.gameObject == gameManager.getPlayer().gameObject)
+            if (other.gameObject == gameManager.getPlayer().gameObject)
             {
-
             }
-            */
         }
-        
+        //enemiesHit.Clear();
     }
 
     protected override void playActivateSound()
@@ -122,4 +107,33 @@ public class PunchScript : Arm_Base
             animationTimer = punchAnimationClip.length;
         }
     }
+
+    public void animationOver()
+    {
+        punchStarted = false;
+        damageDealt = false;
+    }
+
+    /*private void dealDamage()
+    {
+        if (punchStarted)
+        {
+            foreach (KeyValuePair<GameObject, bool> entry in enemiesHit)
+            {
+                if (entry.Value == false)
+                {
+                    Enemy enemy = entry.Key.gameObject.GetComponent<Enemy>();
+                    if (enemy != null)
+                    {
+                        enemy.takeDamage(34);
+                        if (enemiesHit.ContainsKey(enemy.gameObject))
+                        {
+                            enemiesHit.Remove(entry.Key);
+                            enemiesHit.Add(enemy.gameObject, true);
+                        }
+                    }
+                }
+            }
+        }
+    }*/
 }

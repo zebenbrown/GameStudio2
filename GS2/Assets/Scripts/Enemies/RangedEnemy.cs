@@ -1,5 +1,4 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,7 +14,7 @@ public class RangedEnemy : Enemy
         if (isDead) return;
         
         health -= damage;
-        Debug.Log("Ranged Enemy: " + health);
+        //Debug.Log("Ranged Enemy: " + health);
 
         if (health <= 0)
             die();
