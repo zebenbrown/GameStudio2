@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour
             
         }
 
+        SceneManagement.enemiesKilled = enemiesKilled;
+
         if (timeRemaining <= 0)
         {
             SceneManager.LoadScene("GameOver");
