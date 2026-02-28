@@ -105,11 +105,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        camera.transform.position = transform.position - cameraOffset;
         camera.transform.position += currentVelocity * Time.deltaTime;
     }
-        camera.transform.position = Vector3.Lerp(camera.transform.position, transform.position - cameraOffset, 0.5f);
-        //camera.transform.position = transform.position - cameraOffset;
-        //camera.transform.position += currentVelocity * Time.deltaTime;
 
     private void rotatePlayer()
     {
