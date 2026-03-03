@@ -34,4 +34,18 @@ public class MeleeEnemy : Enemy
     {
         return health;
     }
+
+    protected override void changeAudioVolume()
+    {
+        AudioSource audio = gameObject.GetComponent<AudioSource>();
+        if (audio != null)
+        {
+            audio.volume = 0.1f;
+        }
+
+        else
+        {
+            Debug.Log("Could not find audio volume on melee enemy");
+        }
+    }
 }

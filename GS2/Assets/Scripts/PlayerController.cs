@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float rotationSpeed = 10f;
     [SerializeField] private float acceleration = 20f;
     [SerializeField] private float deceleration = 25f;
+    [SerializeField] private float audioVolume = 0.65f;
     private Vector3 currentVelocity = Vector3.zero;
 
     private Vector3 cameraOffset;
@@ -58,7 +59,7 @@ public class PlayerController : MonoBehaviour
         movePlayer();
         rotatePlayer();
 
-        audioSource.volume = currentVelocity.magnitude / maxSpeed;
+        audioSource.volume = (currentVelocity.magnitude / maxSpeed) -  audioVolume;
 
         healthText.text = "Health: " + health;
     }

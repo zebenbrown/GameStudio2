@@ -28,4 +28,19 @@ public class ComboEnemy : Enemy
         GameManager.instance.enemiesKilled++;
         Destroy(gameObject);
     }
+
+    //should have a parameter to change this later probably but not right now
+    protected override void changeAudioVolume()
+    {
+        AudioSource audio = gameObject.GetComponent<AudioSource>();
+        if (audio != null)
+        {
+            audio.volume = 0.1f;
+        }
+
+        else
+        {
+            Debug.Log("Could not find audio volume on combo enemy");
+        }
+    }
 }

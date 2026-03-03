@@ -22,8 +22,8 @@ public class PunchScript : Arm_Base
         punchAnimationClipName = punchAnimationClip.name;
         animator.enabled = false;
 
-        audioSource = GetComponent<AudioSource>();
-
+        audioSource = gameObject.GetComponent<AudioSource>();
+        changeAudioVolume();
         collider = GetComponentInChildren<Collider>();
     }
 
@@ -144,6 +144,11 @@ public class PunchScript : Arm_Base
     {
         punchStarted = false;
         damageDealt = false;
+    }
+
+    private void changeAudioVolume()
+    {
+        audioSource.volume = 0.3f;
     }
 
     /*private void dealDamage()

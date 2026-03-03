@@ -23,6 +23,7 @@ public class Fire : Arm_Base
         forwardForceVector.z += forwardForceFloat;
 
         audioSource = GetComponent<AudioSource>();
+        changeAudioVolume();
     }
 
     public override void armMainAction()
@@ -74,5 +75,10 @@ public class Fire : Arm_Base
         audioSource.clip = getRandomShootSound();
         audioSource.volume = activationVolume;
         audioSource.Play();
+    }
+    
+    private void changeAudioVolume()
+    {
+        audioSource.volume = 0.3f;
     }
 }

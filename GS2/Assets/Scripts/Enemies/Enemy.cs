@@ -33,6 +33,7 @@ public abstract class Enemy : MonoBehaviour
         armList = GetComponentsInChildren<Arm_Base>().ToList<Arm_Base>();
 
         deactivateArmPickup();
+        changeAudioVolume();
     }
 
     private void Update()
@@ -78,6 +79,8 @@ public abstract class Enemy : MonoBehaviour
 
     protected abstract void enemySpecificUpdate();
     public abstract void takeDamage(float damage);
+    
+    protected abstract void changeAudioVolume();
 
     private void deactivateArmPickup()
     {
