@@ -45,6 +45,7 @@ Shader "Shaders/MainMenuScroll"
             CBUFFER_START(UnityPerMaterial)
                 float4 _Color;
                 float4 _ScrollSpeed;
+                float4 _BaseMap_ST;
             CBUFFER_END
 
             TEXTURE2D(_BaseMap);
@@ -56,7 +57,7 @@ Shader "Shaders/MainMenuScroll"
 
                 OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
 
-                float2 uv = IN.uv;
+                float2 uv = TRANSFORM_TEX(IN.uv, _BaseMap);
 
                 // Smooth scrolling
                 uv += _ScrollSpeed.xy * _Time.y;
