@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     {
         goalReached = false;
         levelGoal.SetActive(false);
+        //Cursor.visible = false;
     }
 
     private void Update()

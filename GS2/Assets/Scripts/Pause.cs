@@ -49,6 +49,10 @@ public class Pause : MonoBehaviour
         pausePanel.SetActive(true);
         Time.timeScale = 0;
         isPaused = true;
+        /*if (!Cursor.visible)
+        {
+            Cursor.visible = true;
+        }*/
     }
 
     public void resume()
@@ -56,5 +60,10 @@ public class Pause : MonoBehaviour
         pausePanel.SetActive(false);
         Time.timeScale = 1;
         isPaused = false;
+
+        /*if (Cursor.visible)
+        {
+            Cursor.visible = false;
+        }*/
     }
 }
