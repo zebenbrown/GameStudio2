@@ -159,6 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PunchScript
   rangeIndicator: {fileID: 6871946558074917731}
   isEnemyArm: 0
+  armData: {fileID: 11400000, guid: 54aa0cbd9af084521bdd7fcb8866924d, type: 2}
   punchAnimationClip: {fileID: 7400000, guid: 503a518bd208bf444b4cfd13b2866411, type: 2}
   PUNCH_DAMAGE: 25
   punchAudio: {fileID: 8300000, guid: 9a133432ee6bd5c4b8d4a0bbda916194, type: 3}

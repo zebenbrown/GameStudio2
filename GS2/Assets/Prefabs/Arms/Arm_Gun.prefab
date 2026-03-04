@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   rangeIndicator: {fileID: 6816389643912621240}
   isEnemyArm: 0
+  armData: {fileID: 11400000, guid: a76e8d2de4dc14a87bdea5cadf5c3e0e, type: 2}
   BulletPrefab: {fileID: 8576327340388006737, guid: 53e2c7969ad3bf34d91c0327ea78aba3, type: 3}
   BulletReleasePoint: {fileID: 1269118483910906435}
   shootSounds:

@@ -19,7 +19,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float attackCooldown;
     [SerializeField] protected float attackCooldownTimer;
     [SerializeField] protected float attackDistance;
-
+    
     void Start()
     {
         health = Random.Range(60, 81);

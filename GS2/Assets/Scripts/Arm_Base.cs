@@ -17,9 +17,13 @@ public abstract class Arm_Base : MonoBehaviour
 
     protected AudioSource audioSource;
     protected float activationVolume = 0.6f;
+    
+    [SerializeField] private ArmData armData;
+    protected ArmInstance arm;
 
     private void Start()
     {
+        arm = new ArmInstance(armData);
         gameManager = FindAnyObjectByType<GameManager>();
         gameManager.registerArm(this);
 

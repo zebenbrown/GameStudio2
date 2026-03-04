@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] [Range(0f, 1f)] private float alpha = 1f;
     [SerializeField] private Material bulletMaterial;
     private Color color;
+    private float damage; //needs to be set in "constructor" the constructor function
 
     public bool isPlayers = false;
     public Enemy enemySource;
@@ -14,7 +15,7 @@ public class Bullet : MonoBehaviour
     private Animator animator;
     [SerializeField] private AnimationClip destroyClip;
 
-    [SerializeField] private const float BULLET_DAMAGE = 20.0f;
+    //[SerializeField] private const float BULLET_DAMAGE = 20.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -65,7 +66,7 @@ public class Bullet : MonoBehaviour
         {
             if (enemy != enemySource)
             {
-                enemy.takeDamage(BULLET_DAMAGE);
+                enemy.takeDamage(damage);
                 Destroy(gameObject);
                 return;
             }
@@ -76,7 +77,7 @@ public class Bullet : MonoBehaviour
             {
                 if (enemyParent != enemySource)
                 {
-                    enemyParent.takeDamage(BULLET_DAMAGE);
+                    enemyParent.takeDamage(damage);
                     Destroy(gameObject);
                     return;
                 }
@@ -86,7 +87,7 @@ public class Bullet : MonoBehaviour
         {
             if (!isPlayers)
             {
-                player.takeDamage(BULLET_DAMAGE);
+                player.takeDamage(damage);
                 Destroy(gameObject);
                 return;
             }
@@ -113,5 +114,10 @@ public class Bullet : MonoBehaviour
         color.a = alpha;
 
         bulletMaterial.color = color;
+    }
+
+    public void constructor(float damage)
+    {
+        
     }
 }
