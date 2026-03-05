@@ -91,7 +91,8 @@ public class PunchScript : Arm_Base
                     Enemy enemy = other.gameObject.GetComponent<Enemy>();
                     if (enemy != null)
                     {
-                        enemy.takeDamage(PUNCH_DAMAGE);
+                        Debug.Log("Punch Damage: " + arm.damage);
+                        enemy.takeDamage(arm.damage);
                         damageDealt = true;
                     }
                     

@@ -52,6 +52,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   rangeIndicator: {fileID: 6816389643912621240}
   isEnemyArm: 0
+  rarities:
+  - {fileID: 11400000, guid: e5f1d8b992636435da54d9308ba5eb6b, type: 2}
+  - {fileID: 11400000, guid: e4bcf0186d6ae4eb0a67295382c72432, type: 2}
+  - {fileID: 11400000, guid: ea9cc0a003c57472ebadef9ff4438927, type: 2}
+  - {fileID: 11400000, guid: ce97cd7705ffb46d8a5f565d50beddb3, type: 2}
+  - {fileID: 11400000, guid: e08b627b462ed4a3da3479bcead50f27, type: 2}
+  armData: {fileID: 11400000, guid: a76e8d2de4dc14a87bdea5cadf5c3e0e, type: 2}
   BulletPrefab: {fileID: 8576327340388006737, guid: 53e2c7969ad3bf34d91c0327ea78aba3, type: 3}
   BulletReleasePoint: {fileID: 1269118483910906435}
   shootSounds:

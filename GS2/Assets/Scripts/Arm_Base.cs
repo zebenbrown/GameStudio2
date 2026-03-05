@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,9 +18,18 @@ public abstract class Arm_Base : MonoBehaviour
 
     protected AudioSource audioSource;
     protected float activationVolume = 0.6f;
+    
+    [Header("Scriptable Objects")]
+    protected RarityData rarityData; //gets assigned as the random rarity and needs to be copied to mutate values
+    [SerializeField] protected List<RarityData> rarities; //randomize which one gets selected
+    [SerializeField] private ArmData armData;
+    protected ArmInstance arm;
 
     private void Start()
     {
+        //rarities = new List<RarityData>();
+        rarityData = getRandomRarity();
+        arm = new ArmInstance(armData, rarityData);
         gameManager = FindAnyObjectByType<GameManager>();
         gameManager.registerArm(this);
 
@@ -115,4 +125,66 @@ public abstract class Arm_Base : MonoBehaviour
     protected abstract void armSpecificStart();
 
     public abstract void armMainAction();
+
+    protected RarityData getRandomRarity()
+    {
+        //common
+        var commonData = rarities[0];
+        
+        //uncommon
+        var uncommonData = rarities[1];
+        
+        //rare
+        var rareData = rarities[2];
+        
+        //epic
+        var epicData = rarities[3];
+        
+        //legendary
+        var legendaryData = rarities[4];
+
+        
+        //0 - 35%
+        //1 - 30%
+        //2 - 20%
+        //3 - 10%
+        //4 - 5%
+        var commonChance = commonData.dropChance;
+        var uncommonChance = uncommonData.dropChance;
+        var rareChance = rareData.dropChance;
+        var epicChance = epicData.dropChance;
+        var legendaryChance = legendaryData.dropChance;
+
+        //float rarity = Random.Range(0.0f, 4.0f);
+        //4.0f minus rarity return value times 
+
+        float randomValue = Random.value;
+        //if random value is between 0.0 and 0.1
+        if (randomValue <= legendaryChance)
+        {
+            return rarities[4];
+        }
+        
+        //if random value is between 0.11 and 0.25
+        else if (randomValue <= epicChance)
+        {
+            return rarities[3];
+        }
+        
+        //if random value is between 0.26 and 0.35
+        else if (randomValue <= rareChance)
+        {
+            return rarities[2];
+        }
+        
+        //if random value is between 0.36 and 0.55
+        else if (randomValue <= uncommonChance)
+        {
+            return rarities[1];
+        }
+        
+        //if random value is greater than 0.55
+        return rarities[0];
+    }
+    
 }

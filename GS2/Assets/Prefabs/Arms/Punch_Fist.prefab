@@ -159,6 +159,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PunchScript
   rangeIndicator: {fileID: 6871946558074917731}
   isEnemyArm: 0
+  rarityData: {fileID: 0}
+  rarities:
+  - {fileID: 11400000, guid: e5f1d8b992636435da54d9308ba5eb6b, type: 2}
+  - {fileID: 11400000, guid: e4bcf0186d6ae4eb0a67295382c72432, type: 2}
+  - {fileID: 11400000, guid: ea9cc0a003c57472ebadef9ff4438927, type: 2}
+  - {fileID: 11400000, guid: ce97cd7705ffb46d8a5f565d50beddb3, type: 2}
+  - {fileID: 11400000, guid: e08b627b462ed4a3da3479bcead50f27, type: 2}
+  armData: {fileID: 11400000, guid: 54aa0cbd9af084521bdd7fcb8866924d, type: 2}
   punchAnimationClip: {fileID: 7400000, guid: 503a518bd208bf444b4cfd13b2866411, type: 2}
   PUNCH_DAMAGE: 25
   punchAudio: {fileID: 8300000, guid: 9a133432ee6bd5c4b8d4a0bbda916194, type: 3}

@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] [Range(0f, 1f)] private float alpha = 1f;
     [SerializeField] private Material bulletMaterial;
     private Color color;
+    private float damage; //needs to be set in "constructor" the constructor function
 
     public bool isPlayers = false;
     public Enemy enemySource;
@@ -14,10 +15,10 @@ public class Bullet : MonoBehaviour
     private Animator animator;
     [SerializeField] private AnimationClip destroyClip;
 
-    [SerializeField] private const float BULLET_DAMAGE = 20.0f;
+    //[SerializeField] private const float BULLET_DAMAGE = 20.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         color = bulletMaterial.color;
         animator = GetComponent<Animator>();
@@ -25,68 +26,34 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, 5.0f);
     }
 
-    private void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        //updateTransparency();
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-
-        /*if (collision.gameObject.CompareTag("Player"))
-        {
-            PlayerController.takeDamage(20);
-        }*/
-
-        /*if (collision.gameObject.CompareTag("MeleeEnemy"))
-        {
-            meleeEnemy.GetComponent<MeleeEnemy>();
-            meleeEnemy.takeDamage(20);
-            Destroy(gameObject);
-        }
-
-
-        if (collision.gameObject.CompareTag("RangedEnemy"))
-        {
-            rangedEnemy.GetComponent<RangedEnemy>();
-            rangedEnemy.takeDamage(20);
-            Destroy(gameObject);
-        }
-
-
-        if (collision.gameObject.CompareTag("ComboEnemy"))
-        {
-            comboEnemy.GetComponent<ComboEnemy>();
-            comboEnemy.takeDamage(20);
-            Destroy(gameObject);
-        }*/
-
-        if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemy))
+        if (collision.gameObject.TryGetComponent(out Enemy enemy))
         {
             if (enemy != enemySource)
             {
-                enemy.takeDamage(BULLET_DAMAGE);
+                enemy.takeDamage(damage);
                 Destroy(gameObject);
                 return;
             }
         }
         else if(collision.transform.parent != null)
         {
-            if (collision.transform.parent.TryGetComponent<Enemy>(out Enemy enemyParent))
+            if (collision.transform.parent.TryGetComponent(out Enemy enemyParent))
             {
                 if (enemyParent != enemySource)
                 {
-                    enemyParent.takeDamage(BULLET_DAMAGE);
+                    enemyParent.takeDamage(damage);
                     Destroy(gameObject);
                     return;
                 }
             }
         }
-        if (collision.gameObject.TryGetComponent<PlayerController>(out PlayerController player))
+        if (collision.gameObject.TryGetComponent(out PlayerController player))
         {
             if (!isPlayers)
             {
-                player.takeDamage(BULLET_DAMAGE);
+                player.takeDamage(damage);
                 Destroy(gameObject);
                 return;
             }
@@ -113,5 +80,10 @@ public class Bullet : MonoBehaviour
         color.a = alpha;
 
         bulletMaterial.color = color;
+    }
+
+    public void constructor(float bulletDamage)
+    {
+        this.damage = damage;
     }
 }

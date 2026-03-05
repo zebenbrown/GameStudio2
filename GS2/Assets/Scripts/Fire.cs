@@ -45,6 +45,7 @@ public class Fire : Arm_Base
     public void shootGun()
     {
         GameObject bullet = Instantiate(BulletPrefab, BulletReleasePoint);
+        bullet.GetComponent<Bullet>().constructor(arm.damage);
 
         if (!isEnemyArm)
         {
