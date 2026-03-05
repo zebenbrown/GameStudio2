@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5446317826689774640}
-  - component: {fileID: 4227986080709768983}
   - component: {fileID: 7664783239229470704}
   - component: {fileID: 5928038408901882390}
   - component: {fileID: 4974407999532943006}
@@ -38,23 +37,6 @@ Transform:
   - {fileID: 5007110511150043332}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4227986080709768983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2479017305602448542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88cf83a6b295c374792e3d5970ee7fe0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  camera: {fileID: 0}
-  healthText: {fileID: 0}
-  maxSpeed: 6
-  acceleration: 20
-  deceleration: 25
 --- !u!33 &7664783239229470704
 MeshFilter:
   m_ObjectHideFlags: 0
