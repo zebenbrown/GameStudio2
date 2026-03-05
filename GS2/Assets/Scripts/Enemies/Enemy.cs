@@ -90,4 +90,13 @@ public abstract class Enemy : MonoBehaviour
             arm.isEnemyArm = true;
         }
     }
+
+    protected void dropArms()
+    {
+        foreach (Arm_Base arm in armList)
+        {
+            arm.gameObject.transform.parent = null;
+            arm.isEnemyArm = false;
+        }
+    }
 }

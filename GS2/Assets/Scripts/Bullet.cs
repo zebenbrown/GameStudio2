@@ -84,6 +84,6 @@ public class Bullet : MonoBehaviour
 
     public void constructor(float bulletDamage)
     {
-        this.damage = damage;
+        damage = bulletDamage;
     }
 }

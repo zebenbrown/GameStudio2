@@ -26,6 +26,7 @@ public class ComboEnemy : Enemy
         
         EnemyManager.instance.RemoveEnemy();
         GameManager.instance.enemiesKilled++;
+        dropArms();
         Destroy(gameObject);
     }
 

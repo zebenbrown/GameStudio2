@@ -28,6 +28,7 @@ public class MeleeEnemy : Enemy
         
         EnemyManager.instance.RemoveEnemy();
         GameManager.instance.enemiesKilled++;
+        dropArms();
         Destroy(gameObject);
     }
     public float getHealth()
