@@ -15,4 +15,4 @@ MonoBehaviour:
   rarityName: Epic
   rarityColor: {r: 0.64429384, g: 0.08877712, b: 0.990566, a: 0}
   damageMultiplier: 1.5
-  dropChance: 25
+  dropChance: 0.1

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b390defe0dae34fa183a0ce99a7ef4c3, type: 3}
   m_Name: PunchArm
   m_EditorClassIdentifier: Assembly-CSharp::ArmData
-  baseDamage: 0
+  baseDamage: 25
   baseAttackSpeed: 0

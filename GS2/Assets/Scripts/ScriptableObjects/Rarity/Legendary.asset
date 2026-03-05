@@ -15,4 +15,4 @@ MonoBehaviour:
   rarityName: Legendary
   rarityColor: {r: 0.9622642, g: 0.808844, b: 0.049928807, a: 0}
   damageMultiplier: 1.7
-  dropChance: 10
+  dropChance: 0.05

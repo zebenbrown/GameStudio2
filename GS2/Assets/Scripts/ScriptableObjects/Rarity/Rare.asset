@@ -15,4 +15,4 @@ MonoBehaviour:
   rarityName: Rare
   rarityColor: {r: 0.12388753, g: 0.37664393, b: 0.9056604, a: 0}
   damageMultiplier: 1.35
-  dropChance: 35
+  dropChance: 0.2
